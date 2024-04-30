@@ -4,15 +4,15 @@ import PageCover from "../components/PageCover.astro"
 import Separator from "../components/Separator.astro"
 
 const images = [
-  { index: 1, name: "吉隆坡 - Malaysia" },
-  { index: 2, name: "以佛斯 - Turkey" },
-  { index: 3, name: "波隆那 - Italy" },
-  { index: 4, name: "梵諦岡 - Vatican" },
-  { index: 5, name: "塞爾維亞 - Serbia" },
-  { index: 6, name: "格拉斯 - France" },
-  { index: 7, name: "阿布達比 - U.A.E" },
-  { index: 8, name: "里斯本 - Portugal" },
-  { index: 9, name: "京都 - Japan" },
+  { index: 1, name: "吉隆坡 - Malaysia", destination: "malaysia" },
+  { index: 2, name: "以佛斯 - Turkey", destination: "turkey" },
+  { index: 3, name: "波隆那 - Italy", destination: "italy" },
+  { index: 4, name: "梵諦岡 - Vatican", destination: "vatican" },
+  { index: 5, name: "塞爾維亞 - Serbia", destination: "serbia" },
+  { index: 6, name: "格拉斯 - France", destination: "france" },
+  { index: 7, name: "阿布達比 - U.A.E", destination: "uae" },
+  { index: 8, name: "里斯本 - Portugal", destination: "portugal" },
+  { index: 9, name: "京都 - Japan", destination: "japan" },
 ];
 ---
 
@@ -32,13 +32,16 @@ const images = [
 
   <Separator />
 
-  <ul class="grid lg:grid-cols-3 grid-cols-1 grid-rows-3 gap-4">
+  <section class="grid lg:grid-cols-3 grid-cols-1 grid-rows-3 gap-4">
     {images.map(image => (
-      <li style={{ backgroundImage: `url(/about/${image.index}.jpg)`}}
-        class="bg-cover bg-center h-96 relative text-white">
-        <div class="absolute bottom-0 bg-gradient-to-t from-neutral h-40 w-full"></div>
+      <a
+        href={`/destinations/${image.destination}`}
+        style={{ backgroundImage: `url(/about/${image.index}.jpg)`}}
+        class="bg-cover bg-center h-96 relative text-white"
+      >
+        <div class="absolute bottom-0 bg-gradient-to-t from-neutral duration-150 h-40 w-full"></div>
         <h1 class="absolute left-6 bottom-6">{image.name}</h1>
-      </li>
+      </a>
     ))}
-  </ul>
+  </section>
 </Layout>
