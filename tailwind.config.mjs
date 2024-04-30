@@ -41,6 +41,9 @@ export default {
         "waves": "url(/footer/light-waves.svg)",
         "dark-waves": "url(/footer/dark-waves.svg)"
       },
+      borderRadius: {
+        "sm": "4px",
+      }
     },
 	},
 	plugins: [require("@tailwindcss/typography")],

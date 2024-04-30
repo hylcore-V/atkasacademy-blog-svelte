@@ -26,7 +26,7 @@
         style:background-image="url({image(item.fields.cover?.fields.file?.url)})"
         class="h-40 bg-cover bg-center group-hover:brightness-75 duration-200"
       ></div>
-      <h3 class="font-semibold font-jost">{item.fields.title}</h3>
+      <h3 class="font-[500]">{item.fields.title}</h3>
     </a>
   {/each}
 </section>
@@ -41,8 +41,8 @@
   class="w-full flex items-center justify-center gap-2 mt-sm"
   {onPageChange}
 >
-  <Pagination.PrevButton class="inline-flex items-center justify-center disabled:text-neutral-400 disabled:cursor-not-allowed size-[2.5rem] hover:bg-neutral-200 rounded-lg duration-150">
-    <iconify-icon icon="mdi:chevron-left" class="text-3xl"></iconify-icon>
+  <Pagination.PrevButton class="inline-flex items-center justify-center disabled:text-neutral-400 disabled:cursor-not-allowed size-[2.5rem] hover:bg-neutral-200 rounded-md duration-150">
+    <iconify-icon icon="mdi:chevron-left" class="text-2xl"></iconify-icon>
   </Pagination.PrevButton>
 
   <div class="flex items-center gap-2">
@@ -52,7 +52,7 @@
       {:else}
         <Pagination.Page
           {page}
-          class="inline-flex justify-center items-center size-[2.5rem] rounded-lg hover:bg-neutral-200 data-[selected]:border-neutral data-[selected]:border data-[selected]:bg-neutral duration-150 data-[selected]:text-white font-normal"
+          class="inline-flex justify-center items-center size-[2.5rem] rounded-md hover:bg-neutral-200 data-[selected]:border-neutral data-[selected]:border data-[selected]:bg-neutral duration-150 data-[selected]:text-white font-normal"
         >
           {page.value}
         </Pagination.Page>
@@ -60,7 +60,7 @@
     {/each}
   </div>
 
-  <Pagination.NextButton class="inline-flex items-center justify-center disabled:text-neutral-400 disabled:cursor-not-allowed size-[2.5rem] hover:bg-neutral-200 rounded-lg duration-150">
-    <iconify-icon icon="mdi:chevron-right" class="text-3xl"></iconify-icon>
+  <Pagination.NextButton class="inline-flex items-center justify-center disabled:text-neutral-400 disabled:cursor-not-allowed size-[2.5rem] hover:bg-neutral-200 rounded-md duration-150">
+    <iconify-icon icon="mdi:chevron-right" class="text-2xl"></iconify-icon>
   </Pagination.NextButton>
 </Pagination.Root>
