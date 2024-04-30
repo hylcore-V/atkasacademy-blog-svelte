@@ -4,6 +4,7 @@
   import "iconify-icon";
 
   import ThemeButton from "./ThemeButton.svelte";
+  import { fly } from "svelte/transition";
 
   let isPageTop = true;
   let isPageBottom = false;
@@ -89,3 +90,13 @@
     </a>
   </div>
 </nav>
+
+<!-- Back to top button -->
+{#if !isPageTop && !isPageBottom}
+  <button
+    class="fixed bottom-8 right-8 text-2xl text-white rounded-full shadow-lg bg-neutral-600 w-12 h-12 flex justify-center items-center z-50"
+    on:click={scrollToTop}
+    transition:fly={{ y: 80, duration: 300 }}>
+    <iconify-icon icon="mdi:chevron-up"></iconify-icon>
+  </button>
+{/if}
