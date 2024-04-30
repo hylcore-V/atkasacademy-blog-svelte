@@ -28,12 +28,18 @@ export default {
           "950": "#0a0a0a",
           DEFAULT: "#262626",
         },
+        "footer": "#ececec",
+        "dark-footer": "#434343",
       },
       fontFamily: {
         sans: [...defaultTheme.fontFamily.sans],
         zhanku: ["ZhanKu", ...defaultTheme.fontFamily.serif],
         jost: ["Jost Variable", ...defaultTheme.fontFamily.sans],
-      }
+      },
+      backgroundImage: {
+        "waves": "url(/footer/light-waves.svg)",
+        "dark-waves": "url(/footer/dark-waves.svg)"
+      },
     },
 	},
 	plugins: [],
