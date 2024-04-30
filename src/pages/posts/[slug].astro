@@ -6,6 +6,8 @@ import { formatDate, image } from "$lib/utils";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import type { InferGetStaticPropsType } from "astro";
 import { BLOCKS } from "@contentful/rich-text-types";
+import PostContent from "$components/PostContent.svelte";
+import Separator from "$components/Separator.svelte";
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
@@ -31,10 +33,13 @@ export async function getStaticPaths() {
               `<img
                 src="${image(url)}"
                 alt="${alt}"
-                class="w-full h-full object-cover"/>` :
+                class="w-full h-full object-cover"
+              />` :
 
               // Placeholder
-              `<div class="border-dashed border-neutral dark:border-white border-2 w-full h-96 flex flex-col justify-center items-center rounded-lg">
+              `<div
+                class="border-dashed border-neutral dark:border-white border-2 w-full h-96 flex flex-col justify-center items-center rounded-lg"
+              >
                 <h1 class="font-bold text-3xl">Sorry, it looks like no image was found :(</h1>
               </div>`
             );
@@ -67,4 +72,8 @@ const { content, title, date, cover, destination, podcast } = Astro.props;
       <h1 class="font-semibold text-3xl">{title}</h1>
     </div>
   </PageCover>
+
+  <PostContent client:load {content} {podcast} />
+
+  <Separator />
 </Layout>

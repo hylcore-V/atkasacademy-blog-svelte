@@ -15,6 +15,7 @@
     "@astrojs/tailwind": "^5.1.0",
     "@contentful/rich-text-html-renderer": "^16.3.5",
     "@fontsource-variable/jost": "^5.0.19",
+    "@tailwindcss/typography": "^0.5.13",
     "astro": "^4.7.0",
     "bits-ui": "^0.21.5",
     "clsx": "^2.1.1",
