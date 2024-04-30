@@ -59,7 +59,7 @@ const posts = await contentfulClient.getEntries<BlogPost>({
       >
         <div
           style={{ backgroundImage: `url(${image(item.fields.cover?.fields.file?.url)})` }}
-          class="h-40 bg-cover bg-center group-hover:scale-[103%] group-active:scale-95 duration-300"
+          class="h-40 bg-cover bg-center group-hover:brightness-75 duration-200"
         ></div>
         <h3 class="font-semibold font-jost">{item.fields.title}</h3>
       </a>
