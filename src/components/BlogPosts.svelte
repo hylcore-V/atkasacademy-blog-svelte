@@ -8,8 +8,11 @@
   export let perPage: number;
   export let posts: Entry<BlogPost, "WITHOUT_UNRESOLVABLE_LINKS", string>[];
   export let totalPosts: number;
-  export let nextPage: string | undefined;
-  export let prevPage: string | undefined;
+  export let currPage: number;
+
+  function onPageChange(page: number) {
+    window.location.href = `/blog/${page != 1 ? page : ""}`;
+  }
 </script>
 
 <!-- Grid of posts -->
@@ -32,14 +35,13 @@
 <Pagination.Root
   count={totalPosts}
   {perPage}
+  page={currPage}
   let:pages
   let:range
   class="w-full flex items-center justify-center gap-2 mt-sm"
+  {onPageChange}
 >
-  <Pagination.PrevButton
-    on:click={() => (window.location.href = prevPage || "")}
-    class="inline-flex items-center justify-center disabled:text-neutral-400"
-  >
+  <Pagination.PrevButton class="inline-flex items-center justify-center disabled:text-neutral-400">
     <iconify-icon icon="mdi:chevron-left" class="text-4xl"></iconify-icon>
   </Pagination.PrevButton>
 
@@ -58,10 +60,7 @@
     {/each}
   </div>
 
-  <Pagination.NextButton
-    on:click={() => (window.location.href = nextPage || "")}
-    class="inline-flex items-center justify-center disabled:text-neutral-400"
-  >
+  <Pagination.NextButton class="inline-flex items-center justify-center disabled:text-neutral-400">
     <iconify-icon icon="mdi:chevron-right" class="text-4xl"></iconify-icon>
   </Pagination.NextButton>
 </Pagination.Root>
