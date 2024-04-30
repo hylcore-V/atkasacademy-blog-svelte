@@ -4,7 +4,7 @@ import PageCover from "$components/PageCover.astro";
 import type { InferGetStaticPropsType } from "astro";
 import { contentfulClient, type BlogPost, type Destination } from "$lib/contentful";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
-import Separator from "$components/Separator.astro";
+import Separator from "$components/Separator.svelte";
 import { image } from "$lib/utils";
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
