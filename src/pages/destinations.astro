@@ -1,10 +1,30 @@
 ---
 import Layout from "../layouts/Layout.astro"
 import PageCover from "../components/PageCover.astro"
+import { contentfulClient, type Destination } from "../lib/contentful";
+
+const destinations = await contentfulClient.getEntries<Destination>({
+  content_type: "destination",
+});
+console.log(destinations.items[0].fields.cover?.fields.file?.url);
 ---
 
 <Layout title="Destinations">
   <PageCover src="/covers/destinations.webp" slot="before-content">
     <h1 class="text-3xl uppercase font-jost tracking-widest font-semibold">Destinations</h1>
   </PageCover>
+
+  <section class="text-neutral grid lg:grid-cols-4 grid-cols-1 gap-1">
+    {destinations.items.map(item => (
+      <a
+        href={`/destinations/${item.fields.slug}`}
+        style={{ backgroundImage: `url('https:${item.fields.cover?.fields.file?.url}')` }}
+        class="block h-80 bg-cover bg-center text-white relative dim-image"
+      >
+        <h1 class="absolute left-6 bottom-6 font-bold uppercase text-sm tracking-widest">
+          {item.fields.name}
+        </h1>
+      </a>
+    ))}
+  </section>
 </Layout>
