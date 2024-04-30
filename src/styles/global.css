@@ -1,0 +1,17 @@
+* {
+  scroll-behavior: smooth;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+.dim-image {
+  background-color: hsl(0, 0%, 75%);
+  background-blend-mode: multiply;
+}
+
+@font-face {
+  font-family: "ZhanKu";
+  src: url(/fonts/ZhanKu.ttf);
+}

@@ -1,4 +1,9 @@
 ---
+import "@fontsource-variable/jost";
+import "../styles/global.css";
+
+import Navbar from "../components/Navbar.svelte";
+
 interface Props {
 	title: string;
 }
@@ -17,7 +22,9 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 
-	<body>
+	<body class="h-full">
+    <Navbar client:load />
+
 		<slot />
 	</body>
 </html>
