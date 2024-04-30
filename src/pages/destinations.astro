@@ -1,12 +1,12 @@
 ---
-import Layout from "../layouts/Layout.astro"
-import PageCover from "../components/PageCover.astro"
-import { contentfulClient, type Destination } from "../lib/contentful";
+import Layout from "$layouts/Layout.astro"
+import PageCover from "$components/PageCover.astro"
+import { contentfulClient, type Destination } from "$lib/contentful";
+import { image } from "$lib/utils";
 
 const destinations = await contentfulClient.getEntries<Destination>({
   content_type: "destination",
 });
-console.log(destinations.items[0].fields.cover?.fields.file?.url);
 ---
 
 <Layout title="Destinations">
@@ -18,7 +18,7 @@ console.log(destinations.items[0].fields.cover?.fields.file?.url);
     {destinations.items.map(item => (
       <a
         href={`/destinations/${item.fields.slug}`}
-        style={{ backgroundImage: `url('https:${item.fields.cover?.fields.file?.url}')` }}
+        style={{ backgroundImage: `url('${image(item.fields.cover?.fields.file?.url)}')` }}
         class="block h-80 bg-cover bg-center text-white relative dim-image"
       >
         <h1 class="absolute left-6 bottom-6 font-bold uppercase text-sm tracking-widest">

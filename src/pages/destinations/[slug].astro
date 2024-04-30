@@ -1,0 +1,68 @@
+---
+import Layout from "$layouts/Layout.astro"
+import PageCover from "$components/PageCover.astro";
+import type { InferGetStaticPropsType } from "astro";
+import { contentfulClient, type BlogPost, type Destination } from "$lib/contentful";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import Separator from "$components/Separator.astro";
+import { image } from "$lib/utils";
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { slug } = Astro.params;
+const { name, cover, heading, description } = Astro.props;
+
+export async function getStaticPaths() {
+  const entries = await contentfulClient.getEntries<Destination>({
+    content_type: "destination",
+  });
+
+  const pages = entries.items.map(item => ({
+    params: { slug: item.fields.slug },
+    props: {
+      name: item.fields.name,
+      cover: item.fields.cover,
+      heading: item.fields.heading,
+      continent: item.fields.continent,
+      description: documentToHtmlString(item.fields.description),
+    },
+  }));
+
+  return pages;
+}
+
+const posts = await contentfulClient.getEntries<BlogPost>({
+  content_type: "blogPost",
+  "fields.destination.sys.contentType.sys.id": "destination",
+  "fields.destination.fields.slug[match]": slug,
+  "order": ["-fields.date"],
+});
+---
+
+<Layout title={name}>
+  <PageCover src={cover?.fields.file?.url} slot="before-content">
+    <h1 class="text-3xl uppercase font-jost tracking-widest font-semibold">{name}</h1>
+  </PageCover>
+
+  <section class="space-y-xs">
+    <h2 class="font-semibold text-2xl">{heading}</h2>
+    <article set:html={description}></article>
+  </section>
+
+  <Separator />
+
+  <section class="text-neutral grid grid-cols-4 gap-xxs">
+    {posts.items.map(item => (
+      <a
+        href={`/posts/${item.fields.slug}`}
+        class="group space-y-[0.5rem]"
+      >
+        <div
+          style={{ backgroundImage: `url(${image(item.fields.cover?.fields.file?.url)})` }}
+          class="h-40 bg-cover bg-center group-hover:scale-[103%] group-active:scale-95 duration-300"
+        ></div>
+        <h3 class="font-semibold font-jost">{item.fields.title}</h3>
+      </a>
+    ))}
+  </section>
+</Layout>
