@@ -1,6 +1,9 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { cn } from "../lib/utils";
+  import "iconify-icon";
+
+  import ThemeButton from "./ThemeButton.svelte";
 
   let isPageTop = true;
   let isPageBottom = false;
@@ -41,8 +44,48 @@
   isScrolledScreen && scrollDirection === "down" ? "-top-[7rem]" : "top-0",
   {
     "text-white bg-transparent h-big-nav": isPageTop,
-    "text-neutral bg-white dark:bg-neutral dark:text-white h-nav shadow-lg": !isPageTop,
+    "text-neutral bg-white h-nav shadow-lg": !isPageTop,
   }
 )}>
+  <header class={cn(
+    "font-zhanku duration-100",
+    isPageTop ? "text-3xl" : "text-2xl"
+  )}>
+    <a class="duration-150" href="/">世界是学校</a>
+  </header>
 
+  <!-- Navigation -->
+  <div class="font-jost font-semibold uppercase tracking-widest text-xs gap-8 items-center duration-200 h-full flex">
+    <a href="/">Home</a>
+    <a href="/destinations">Destinations</a>
+    <a href="/blog">Blog</a>
+    <a href="/gallery">Gallery</a>
+    <a href="/about">About</a>
+
+    <ThemeButton />
+  </div>
+
+  <!-- Socials -->
+  <div class="space-x-2">
+    <a
+      href="https://www.facebook.com/worldschool.atlas.academy"
+      target="_blank"
+    >
+      <iconify-icon icon="mdi:facebook" class="text-xl duration-150"></iconify-icon>
+    </a>
+
+    <a
+      href="https://open.spotify.com/show/7xuJTB7kCfKB0JVBkgW4k3"
+      target="_blank"
+    >
+      <iconify-icon icon="mdi:spotify" class="text-xl duration-150"></iconify-icon>
+    </a>
+
+    <a
+      href="https://podcasts.apple.com/us/podcast/%E4%B8%96%E7%95%8C%E6%98%AF%E5%AD%B8%E6%A0%A1-worldschooling/id1646258789"
+      target="_blank"
+    >
+      <iconify-icon icon="fa:podcast" class="text-xl duration-150"></iconify-icon>
+    </a>
+  </div>
 </nav>
