@@ -1,0 +1,70 @@
+---
+import PageCover from "$components/PageCover.astro";
+import Layout from "$layouts/Layout.astro"
+import { contentfulClient, type BlogPost } from "$lib/contentful";
+import { formatDate, image } from "$lib/utils";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import type { InferGetStaticPropsType } from "astro";
+import { BLOCKS } from "@contentful/rich-text-types";
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+export async function getStaticPaths() {
+  const entries = await contentfulClient.getEntries<BlogPost>({
+    content_type: "blogPost",
+  });
+
+  const pages = entries.items.map(item => ({
+    params: { slug: item.fields.slug },
+    props: {
+      title: item.fields.title,
+      content: documentToHtmlString(item.fields.content, {
+        renderNode: {
+          [BLOCKS.EMBEDDED_ASSET]: (node) => {
+            const url = node.data.target.fields.file?.url;
+            const alt = node.data.target.fields.title ?? "";
+
+            return (
+              url ?
+
+              // Actual image
+              `<img
+                src="${image(url)}"
+                alt="${alt}"
+                class="w-full h-full object-cover"/>` :
+
+              // Placeholder
+              `<div class="border-dashed border-neutral dark:border-white border-2 w-full h-96 flex flex-col justify-center items-center rounded-lg">
+                <h1 class="font-bold text-3xl">Sorry, it looks like no image was found :(</h1>
+              </div>`
+            );
+          },
+        },
+      }),
+      date: formatDate(item.fields.date),
+      cover: item.fields.cover?.fields.file?.url,
+      destination: item.fields.destination?.fields.slug,
+      podcast: item.fields.podcast ?? [],
+    },
+  }));
+
+  return pages;
+}
+
+const { slug } = Astro.params;
+const { content, title, date, cover, destination, podcast } = Astro.props;
+---
+
+<Layout {title}>
+  <PageCover src={cover} slot="before-content">
+    <div class="uppercase font-normal text-lg font-jost tracking-widest space-y-xxs">
+      <time class="inline">{date}</time>
+      <span>|</span>
+      <a href={`/destinations/${destination}`} class="inline">
+        {destination}
+      </a>
+
+      <h1 class="font-semibold text-3xl">{title}</h1>
+    </div>
+  </PageCover>
+</Layout>

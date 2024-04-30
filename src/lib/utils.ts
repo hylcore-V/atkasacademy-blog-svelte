@@ -10,5 +10,14 @@ export function image(url: string | undefined) {
   return `https:${url}?fm=jpg&w=600&h=1000`;
 }
 
+export function formatDate(dateString: string) {
+  const date = new Date(dateString);
+  const day = date.getDate();
+  const month = date.toLocaleDateString("en-US", { month: "short" });
+  const year = date.getFullYear();
+
+  return `${day} ${month} ${year}`;
+}
+
 export type Continent = "Asia" | "Americas" | "Africa" | "Europe" | "Middle East";
 export type PostType = "Podcast" | "Reflection";
