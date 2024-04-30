@@ -1,0 +1,38 @@
+---
+import BlogPosts from "$components/BlogPosts.svelte";
+import PageCover from "$components/PageCover.astro";
+import Layout from "$layouts/Layout.astro";
+import { contentfulClient, type BlogPost } from "$lib/contentful";
+import type { InferGetStaticPropsType, PaginateFunction } from "astro";
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
+  const perPage = 8;
+
+  const entries = await contentfulClient.getEntries<BlogPost>({
+    content_type: "blogPost",
+    order: ["fields.date"],
+    limit: 1000,
+  });
+
+  return paginate(entries.items, { pageSize: perPage });
+}
+
+const { page } = Astro.props;
+---
+
+<Layout title="Blog">
+  <PageCover src="/covers/blog.webp" slot="before-content">
+    <h1 class="text-3xl uppercase font-jost tracking-widest font-semibold">Blog</h1>
+  </PageCover>
+
+  <BlogPosts
+    client:load
+    posts={page.data}
+    perPage={8}
+    totalPosts={page.total}
+    nextPage={page.url.next}
+    prevPage={page.url.prev}
+  />
+</Layout>
