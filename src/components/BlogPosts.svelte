@@ -41,7 +41,7 @@
   class="w-full flex items-center justify-center gap-2 mt-sm"
   {onPageChange}
 >
-  <Pagination.PrevButton class="inline-flex items-center justify-center disabled:text-neutral-400 size-[2.5rem] hover:bg-neutral-200 rounded-lg duration-150">
+  <Pagination.PrevButton class="inline-flex items-center justify-center disabled:text-neutral-400 disabled:cursor-not-allowed size-[2.5rem] hover:bg-neutral-200 rounded-lg duration-150">
     <iconify-icon icon="mdi:chevron-left" class="text-3xl"></iconify-icon>
   </Pagination.PrevButton>
 
@@ -60,7 +60,7 @@
     {/each}
   </div>
 
-  <Pagination.NextButton class="inline-flex items-center justify-center disabled:text-neutral-400 size-[2.5rem] hover:bg-neutral-200 rounded-lg duration-150">
+  <Pagination.NextButton class="inline-flex items-center justify-center disabled:text-neutral-400 disabled:cursor-not-allowed size-[2.5rem] hover:bg-neutral-200 rounded-lg duration-150">
     <iconify-icon icon="mdi:chevron-right" class="text-3xl"></iconify-icon>
   </Pagination.NextButton>
 </Pagination.Root>
