@@ -10,7 +10,7 @@ export default {
         "sm": "4rem",
         "md": "8rem",
         "lg": "15rem",
-        "nav": "5rem",
+        "nav": "4.5rem",
         "big-nav": "6rem",
       },
       colors: {
