@@ -6,6 +6,7 @@
 
   import ThemeButton from "$components/ThemeButton.svelte";
   import PostBar from "$components/PostBar.svelte";
+  import ScrollProgress from "$components/ScrollProgress.svelte";
 
   export let isPost: boolean;
 
@@ -14,14 +15,14 @@
   let scrollDirection: "up" | "down" = "up";
   let isScrolledScreen = false;
   let isScrolledContent = false;
+  let scrollPercent = 0;
 
   function checkPageTop() {
     isPageTop = window.scrollY === 0;
-    isPageBottom = Math.ceil(
-      window.innerHeight + window.scrollY
-    ) >= document.body.offsetHeight;
+    isPageBottom = Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight;
     isScrolledScreen = window.scrollY > window.innerHeight;
     isScrolledContent = window.scrollY > document.body.offsetHeight - 1000;
+    scrollPercent = (window.scrollY) / window.document.body.offsetHeight * 100;
   }
 
   function checkScrollDirection(e: WheelEvent) {
@@ -109,4 +110,6 @@
 <!-- Liking and comments bar on posts only -->
 {#if isPost}
   <PostBar show={isScrolledScreen && scrollDirection === "down" && !isScrolledContent} />
+
+  <ScrollProgress {scrollPercent} />
 {/if}
