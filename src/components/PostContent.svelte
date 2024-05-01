@@ -1,7 +1,13 @@
 <script lang="ts">
   import { extractSpotifyId } from "$lib/utils";
-  import { afterUpdate, onMount } from "svelte";
-  import { type ImageType, layouts, longAspect, landscapeAspect, portraitAspect } from "$lib/imageLayouts";
+  import { onMount } from "svelte";
+  import {
+    type ImageType,
+    layouts,
+    longAspect,
+    landscapeAspect,
+    portraitAspect
+  } from "$lib/imageLayouts";
 
   export let content: string;
   export let podcast: string;
@@ -16,59 +22,56 @@
   }
 
   onMount(() => {
-    window.onload = () => {
-      console.log("Content loaded");
+    let tempImages: HTMLImageElement[] = [];
+    const images = Array.from(contentContainer.querySelectorAll("img"));
 
-      let tempImages: HTMLImageElement[] = [];
-      const images = Array.from(contentContainer.querySelectorAll("img"));
+    // Grouping images that are next to each other
+    images.forEach(image => {
+      tempImages.push(image);
 
-      images.forEach(image => {
-        tempImages.push(image);
+      if (image.nextElementSibling?.tagName !== "IMG") {
+        imageGroup.push([...tempImages]);
+        tempImages = [];
+      }
+    });
 
-        if (image.nextElementSibling?.tagName !== "IMG") {
-          imageGroup.push([...tempImages]);
-          tempImages = [];
-        }
+    imageGroup.forEach((group, i) => {
+      // Checking what orientation each image in group is
+      const imageTypes: ImageType[] = group.map(
+        image => image.naturalWidth > image.naturalHeight ? "landscape" : "portrait"
+      );
+
+      // Getting the correct image layout based on how many images and orientation
+      const layoutSize = layouts[group.length];
+      const layout = layoutSize.find(layout =>
+        layout.order.toString() === imageTypes.toString()
+      );
+
+      // Set properties for CSS grid
+      layout?.grid.forEach((item, i) => {
+        group[i].style.gridRow = `${item.rowStart} / ${item.rowEnd}`;
+        group[i].style.gridColumn = `${item.colStart} / ${item.colEnd}`;
       });
 
-      imageGroup.forEach((group, i) => {
-        const imageTypes: ImageType[] = group.map(
-          image => image.naturalWidth > image.naturalHeight ? "landscape" : "portrait"
-        );
+      const wrapper = document.createElement("div");
+      wrapper.style.display = "grid";
+      wrapper.style.gap = "0.5rem";
 
-        const layoutSize = layouts[group.length];
-        const layout = layoutSize.find(layout =>
-          layout.order.toString() === imageTypes.toString()
-        );
-
-        if (layout) {
-          layout.grid.forEach((item, i) => {
-            group[i].style.gridRow = `${item.rowStart} / ${item.rowEnd}`;
-            group[i].style.gridColumn = `${item.colStart} / ${item.colEnd}`;
-          });
+      // Adding the images in the group to a wrapper grid
+      group[0].parentNode?.insertBefore(wrapper, group[0]);
+      group.forEach((image, i) => {
+        if (layout?.grid[i].colEnd === 3) {
+          image.style.aspectRatio = longAspect;
+        } else if (image.naturalWidth >= image.naturalHeight) {
+          image.style.aspectRatio = landscapeAspect;
+        } else {
+          image.style.aspectRatio = portraitAspect;
         }
 
-        const wrapper = document.createElement("div");
-        wrapper.style.display = "grid";
-        wrapper.style.gap = "0.5rem";
-
-        group[0].parentNode?.insertBefore(wrapper, group[0]);
-        group.forEach((image, i) => {
-          if (layout?.grid[i].colEnd === 3) {
-            image.style.aspectRatio = longAspect;
-          } else if (image.naturalWidth >= image.naturalHeight) {
-            image.style.aspectRatio = landscapeAspect;
-          } else {
-            image.style.aspectRatio = portraitAspect;
-          }
-
-          wrapper.appendChild(image);
-        });
+        wrapper.appendChild(image);
       });
-    }
-  });
+    });
 
-  onMount(() => {
     headings = contentContainer.querySelectorAll("h1");
 
     if (headings) {
