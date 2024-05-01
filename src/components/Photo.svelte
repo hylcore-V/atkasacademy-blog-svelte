@@ -6,7 +6,14 @@
   export let photo: Entry<GalleryPhoto, "WITHOUT_UNRESOLVABLE_LINKS", string>;
 </script>
 
-<div
-  style:background-image="url({image(photo.fields.image?.fields.file?.url)})"
-  class="aspect-square duration-200 w-full bg-cover bg-center bg-neutral-200"
-/>
+<button class="group relative">
+  <div
+    style:background-image="url({image(photo.fields.image?.fields.file?.url)})"
+    class="aspect-square duration-200 w-full bg-cover bg-center bg-neutral-200 group-hover:brightness-50"
+  />
+
+  <div class="w-4/5 absolute left-1/2 -translate-x-1/2 group-hover:-translate-y-1/2 group-hover:opacity-100 opacity-0 duration-200 top-1/2 text-white">
+    <h1 class="text-md uppercase font-jost font-semibold tracking-widest">{photo.fields.title}</h1>
+    <small class="text-sm italic relative top-4">{photo.fields.city}</small>
+  </div>
+</button>
