@@ -6,9 +6,11 @@ import { formatDate, image } from "$lib/utils";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import type { InferGetStaticPropsType } from "astro";
 import { BLOCKS } from "@contentful/rich-text-types";
+
 import PostContent from "$components/PostContent.svelte";
 import Separator from "$components/Separator.svelte";
 import PostNavigation from "$components/PostNavigation.astro";
+import Comments from "$components/Comments.svelte";
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
@@ -75,7 +77,7 @@ const { content, title, date, cover, destination, podcast } = Astro.props;
   </PageCover>
 
   <PostContent client:load {content} {podcast} />
+  <Separator class="mx-lg w-auto" />
+  <Comments client:load {slug} />
   <PostNavigation {slug} />
-
-  <Separator />
 </Layout>

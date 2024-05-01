@@ -1,0 +1,47 @@
+<script lang="ts">
+  import { Label } from "bits-ui";
+
+  export let slug: string;
+
+  function createComment() {
+
+  }
+</script>
+
+<section class="mx-lg">
+  <form
+    class="w-full space-y-xs"
+    on:submit|preventDefault={createComment}
+  >
+    <div class="space-y-xxs">
+      <Label.Root for="body" class="uppercase tracking-widest font-semibold text-sm font-jost">
+        Add Comment*
+      </Label.Root>
+      <textarea
+        name="Add Comment"
+        class="block w-full outline-none p-2 bg-neutral-100 rounded-md"
+        id="body"
+        rows={5}
+        required
+      />
+    </div>
+
+    <div class="space-y-xxs">
+      <Label.Root for="author" class="uppercase tracking-widest font-semibold text-sm font-jost">
+        Your Name*
+      </Label.Root>
+      <input
+        type="text"
+        class="block w-full outline-none p-2 bg-neutral-100 rounded-md"
+        id="author"
+        required
+      />
+    </div>
+
+    <input
+      type="submit"
+      value="Post Comment"
+      class="uppercase tracking-widest font-jost font-semibold bg-neutral p-xxs px-xs text-sm text-white cursor-pointer rounded-md"
+    />
+  </form>
+</section>
