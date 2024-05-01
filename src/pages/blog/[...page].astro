@@ -8,12 +8,11 @@ import type { InferGetStaticPropsType, PaginateFunction } from "astro";
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
-  const perPage = 12;
+  const perPage = 16;
 
   const entries = await contentfulClient.getEntries<BlogPost>({
     content_type: "blogPost",
     order: ["fields.date"],
-    limit: 1000,
   });
 
   return paginate(entries.items, { pageSize: perPage });
