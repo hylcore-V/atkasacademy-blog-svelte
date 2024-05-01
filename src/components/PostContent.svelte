@@ -17,7 +17,7 @@
 
   afterUpdate(() => {
     window.onload = () => {
-      console.log("Loaded");
+      console.log("Content loaded");
 
       let tempImages: HTMLImageElement[] = [];
       const images = Array.from(contentContainer.querySelectorAll("img"));
@@ -91,7 +91,7 @@
 
   <article
     bind:this={contentContainer}
-    class="prose prose-neutral max-w-none prose-img:my-0 prose-h1:mt-sm"
+    class="prose prose-neutral max-w-none prose-img:my-0 prose-h1:mt-sm prose-h1:font-jost"
   >
     {@html content}
   </article>

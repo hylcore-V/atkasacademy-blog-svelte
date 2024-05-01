@@ -1,15 +1,19 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { cn } from "$lib/utils";
+  import { fly } from "svelte/transition";
   import "iconify-icon";
 
-  import ThemeButton from "./ThemeButton.svelte";
-  import { fly } from "svelte/transition";
+  import ThemeButton from "$components/ThemeButton.svelte";
+  import PostBar from "$components/PostBar.svelte";
+
+  export let isPost: boolean;
 
   let isPageTop = true;
   let isPageBottom = false;
   let scrollDirection: "up" | "down" = "up";
   let isScrolledScreen = false;
+  let isScrolledContent = false;
 
   function checkPageTop() {
     isPageTop = window.scrollY === 0;
@@ -17,6 +21,7 @@
       window.innerHeight + window.scrollY
     ) >= document.body.offsetHeight;
     isScrolledScreen = window.scrollY > window.innerHeight;
+    isScrolledContent = window.scrollY > document.body.offsetHeight - 1500;
   }
 
   function checkScrollDirection(e: WheelEvent) {
@@ -99,4 +104,9 @@
     transition:fly={{ y: 80, duration: 300 }}>
     <iconify-icon icon="mdi:chevron-up"></iconify-icon>
   </button>
+{/if}
+
+<!-- Liking and comments bar on posts only -->
+{#if isPost}
+  <PostBar show={isScrolledScreen /* && scrollDirection === "down"  */&& !isScrolledContent} />
 {/if}

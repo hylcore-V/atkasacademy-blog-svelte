@@ -1,14 +1,20 @@
 <script lang="ts">
   import { Label } from "bits-ui";
+  import { onMount } from "svelte";
+  import "iconify-icon";
 
   export let slug: string;
 
   function createComment() {
 
   }
+
+  onMount(() => {
+    console.log("heyo");
+  });
 </script>
 
-<section class="mx-lg">
+<section class="lg:mx-lg mb-xs">
   <form
     class="w-full space-y-xs"
     on:submit|preventDefault={createComment}
