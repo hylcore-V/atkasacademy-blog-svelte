@@ -2,7 +2,7 @@
   import type { GalleryPhoto } from "$lib/contentful";
   import type { Entry } from "contentful";
   import Pagination from "$components/Pagination.svelte";
-  import { image } from "$lib/utils";
+  import Photo from "$components/Photo.svelte";
 
   export let perPage: number;
   export let gallery: Entry<GalleryPhoto, "WITHOUT_UNRESOLVABLE_LINKS", string>[];
@@ -17,11 +17,7 @@
 <!-- Grid of photos -->
 <section class="text-neutral grid grid-cols-5 gap-1">
   {#each gallery as photo}
-    <img
-      src={image(photo.fields.image?.fields.file?.url)}
-      alt={photo.fields.image?.fields.description}
-      class="aspect-square duration-200"
-    />
+    <Photo {photo} />
   {/each}
 </section>
 
