@@ -2,17 +2,22 @@
   import { cn } from "$lib/utils";
 
   export let show: boolean;
+
+  function scrollToComments() {
+    const target = document.getElementById("comments") as HTMLHeadingElement;
+    window.scrollTo(0, target.offsetTop - 100);
+  }
 </script>
 
 <div class={cn(
-  "fixed left-1/2 -translate-x-1/2 flex gap-xs bg-white shadow-lg rounded-full px-xs py-3 duration-300",
-  show ? "bottom-xs opacity-100" : "-bottom-xs opacity-0"
+  "fixed left-1/2 -translate-x-1/2 flex gap-xs bg-white shadow-lg rounded-full px-xs py-3 duration-300 font-medium text-sm font-jost tracking-widest",
+  show ? "bottom-[1.5rem] opacity-100" : "-bottom-xs opacity-0"
 )}>
-  <button class="flex items-center gap-2 font-jost tracking-widest font-semibold text-sm">
+  <button class="flex items-center gap-2">
     <iconify-icon icon="mdi:heart-outline" class="text-xl"></iconify-icon>
     <p>12</p>
   </button>
-  <button class="flex items-center gap-2 font-jost tracking-widest font-semibold text-sm">
+  <button class="flex items-center gap-2" on:click={scrollToComments}>
     <iconify-icon icon="mdi:comment-outline" class="text-xl"></iconify-icon>
     <p>5</p>
   </button>

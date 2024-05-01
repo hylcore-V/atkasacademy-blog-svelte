@@ -21,7 +21,7 @@
       window.innerHeight + window.scrollY
     ) >= document.body.offsetHeight;
     isScrolledScreen = window.scrollY > window.innerHeight;
-    isScrolledContent = window.scrollY > document.body.offsetHeight - 1500;
+    isScrolledContent = window.scrollY > document.body.offsetHeight - 1000;
   }
 
   function checkScrollDirection(e: WheelEvent) {
@@ -108,5 +108,5 @@
 
 <!-- Liking and comments bar on posts only -->
 {#if isPost}
-  <PostBar show={isScrolledScreen /* && scrollDirection === "down"  */&& !isScrolledContent} />
+  <PostBar show={isScrolledScreen && scrollDirection === "down" && !isScrolledContent} />
 {/if}
