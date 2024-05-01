@@ -11,6 +11,8 @@ export default {
         "sm": "4rem",
         "md": "8rem",
         "lg": "15rem",
+        "xl": "20rem",
+        "xxl": "40rem",
         "nav": "4.5rem",
         "big-nav": "6rem",
       },
