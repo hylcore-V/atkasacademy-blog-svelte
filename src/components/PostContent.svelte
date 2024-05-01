@@ -15,7 +15,7 @@
     window.scrollTo(0, target.offsetTop - 100);
   }
 
-  afterUpdate(() => {
+  onMount(() => {
     window.onload = () => {
       console.log("Content loaded");
 
