@@ -8,7 +8,7 @@ import Gallery from "$components/Gallery.svelte";
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
-  const perPage = 20;
+  const perPage = 50;
 
   const entries = await contentfulClient.getEntries<GalleryPhoto>({
     content_type: "galleryPhoto",
