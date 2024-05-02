@@ -99,7 +99,7 @@
 </nav>
 
 <!-- Back to top button -->
-{#if !isPageTop && !isPageBottom}
+{#if !isPageTop && !isPageBottom && !isHome}
   <button
     class="fixed bottom-8 right-8 text-2xl text-white rounded-full shadow-lg bg-neutral w-12 h-12 flex justify-center items-center z-10"
     on:click={scrollToTop}

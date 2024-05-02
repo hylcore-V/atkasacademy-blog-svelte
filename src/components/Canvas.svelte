@@ -15,7 +15,7 @@
       scrub: true,
       pin: true,
       start: "top top",
-      end: "+=100%",
+      end: "+=1000%",
     });
   });
 </script>

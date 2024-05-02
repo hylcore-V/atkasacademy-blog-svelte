@@ -8,7 +8,6 @@
   import Earth from "$components/Earth.svelte";
 
   interactivity();
-  const scale = spring(1);
 
   export let st: ScrollTrigger;
 
@@ -26,11 +25,9 @@
   on:create={({ ref }) => ref.lookAt(0, 0, 0)}
 />
 
-<T.AmbientLight intensity={5} />
+<T.AmbientLight intensity={10} />
 
 <Earth
   rotation.y={$rotation}
-  scale={$scale}
-  on:pointerenter={() => scale.set(1.1)}
-  on:pointerleave={() => scale.set(1)}
+  scale={1}
 />
