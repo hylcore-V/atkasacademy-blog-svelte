@@ -3,6 +3,8 @@
   import { onMount } from "svelte";
   import { Collapsible } from "bits-ui";
   import "iconify-icon";
+  import { slide } from "svelte/transition";
+	import Separator from "$components/Separator.svelte";
   import {
     type ImageType,
     layouts,
@@ -10,7 +12,6 @@
     landscapeAspect,
     portraitAspect
   } from "$lib/imageLayouts";
-  import { slide } from "svelte/transition";
 
   export let content: string;
   export let podcast: string;
@@ -110,15 +111,20 @@
         {/each}
       </Collapsible.Content>
     </Collapsible.Root>
+
+    <Separator />
   {/if}
 
   {#if podcast.length > 0}
-    <iframe
-      title="Spotify Player Embed"
-      src={`https://open.spotify.com/embed/episode/${extractSpotifyId(podcast)}?utm_source=generator&theme=0`}
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      loading="lazy"
-      class="w-full h-20"></iframe>
+    <div class="p-xxs bg-neutral text-white font-semibold uppercase font-jost tracking-widest space-y-xxs">
+      <h3>This Episode: </h3>
+      <iframe
+        title="Spotify Player Embed"
+        src={`https://open.spotify.com/embed/episode/${extractSpotifyId(podcast)}?utm_source=generator&theme=0`}
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+        class="w-full h-20"></iframe>
+    </div>
   {/if}
 
   <article
