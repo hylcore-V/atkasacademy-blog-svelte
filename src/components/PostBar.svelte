@@ -10,7 +10,7 @@
 </script>
 
 <div class={cn(
-  "fixed left-1/2 -translate-x-1/2 flex gap-xs bg-white shadow-lg rounded-full px-xs py-3 duration-300 font-medium text-sm font-jost tracking-widest",
+  "fixed left-1/2 -translate-x-1/2 flex gap-xs bg-white shadow-lg rounded-full px-[1.5rem] py-3 duration-300 font-medium text-sm font-jost tracking-widest",
   show ? "bottom-[1.5rem] opacity-100" : "-bottom-xs opacity-0"
 )}>
   <button class="flex items-center gap-2">
