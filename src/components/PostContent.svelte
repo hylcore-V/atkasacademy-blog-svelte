@@ -47,9 +47,7 @@
 
       // Getting the correct image layout based on how many images and orientation
       const layoutSize = layouts[group.length];
-      const layout = layoutSize.find(layout =>
-        layout.order.toString() === imageTypes.toString()
-      );
+      const layout = layoutSize.find(layout => layout.order.toString() === imageTypes.toString());
 
       // Set properties for CSS grid
       layout?.grid.forEach((item, i) => {
