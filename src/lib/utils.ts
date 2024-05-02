@@ -19,6 +19,10 @@ export function formatDate(dateString: string) {
   return `${day} ${month} ${year}`;
 }
 
+export function clamp(num: number, min: number, max: number) {
+  return Math.min(Math.max(num, min), max);
+}
+
 export function extractSpotifyId(url: string) {
   const regex = /\/episode\/([A-Za-z0-9]+)\?/;
   return url.match(regex)?.[1];
