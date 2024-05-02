@@ -25,6 +25,11 @@
   function changePhoto(direction: -1 | 1) {
     selectedIndex = clamp(selectedIndex + direction, 0, gallery.length - 1);
   }
+
+  function keyPress(e: KeyboardEvent) {
+    if (e.code === "ArrowRight") changePhoto(1);
+    else if (e.code === "ArrowLeft") changePhoto(-1);
+  }
 </script>
 
 <!-- Grid of photos -->
@@ -45,7 +50,7 @@
     />
 
     <Dialog.Content class="fixed z-50 w-full h-full inset-0 text-white pointer-events-none">
-      <div class="relative w-full h-full">
+      <div class="relative w-full h-full" on:keydown={keyPress} role="button" tabindex="0">
         <Dialog.Close class="absolute top-xs right-xs pointer-events-auto size-xs">
           <iconify-icon icon="mdi:close" class="text-4xl"></iconify-icon>
         </Dialog.Close>
