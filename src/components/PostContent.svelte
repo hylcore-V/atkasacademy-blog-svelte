@@ -87,7 +87,7 @@
 
 <section class="lg:mx-lg lg:my-sm space-y-8">
   {#if headings && headings.length !== 0}
-    <Collapsible.Root class="w-full bg-neutral text-white" bind:open={isOutlineOpen}>
+    <Collapsible.Root class="w-full bg-neutral text-white rounded-md" bind:open={isOutlineOpen}>
       <Collapsible.Trigger class="flex justify-between w-full p-xxs">
         <h3 class="font-jost font-semibold tracking-widest uppercase">Table of Contents</h3>
         <iconify-icon icon="mdi:chevron-down" class={cn(
@@ -96,7 +96,7 @@
         )}></iconify-icon>
       </Collapsible.Trigger>
 
-      <Collapsible.Content transition={slide} class="bg-neutral-100 text-neutral py-2">
+      <Collapsible.Content transition={slide} class="bg-neutral-100 text-neutral py-2 rounded-b-md">
         {#each headings as heading, i}
           <button
             on:click={() => scrollToSection(i.toString())}
@@ -116,14 +116,15 @@
   {/if}
 
   {#if podcast.length > 0}
-    <div class="p-xxs bg-neutral text-white font-semibold uppercase font-jost tracking-widest space-y-xxs">
+    <div class="p-xxs bg-neutral text-white font-semibold uppercase font-jost tracking-widest space-y-xxs rounded-md">
       <h3>Listen to this episode</h3>
       <iframe
         title="Spotify Player Embed"
         src={`https://open.spotify.com/embed/episode/${extractSpotifyId(podcast)}?utm_source=generator&theme=0`}
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         loading="lazy"
-        class="w-full h-20"></iframe>
+        class="w-full h-20"
+      ></iframe>
     </div>
   {/if}
 
