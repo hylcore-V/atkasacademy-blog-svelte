@@ -15,7 +15,7 @@
 </script>
 
 <!-- Grid of photos -->
-<section class="text-neutral grid grid-cols-5 gap-1">
+<section class="text-neutral grid grid-cols-5 gap-xxs">
   {#each gallery as photo}
     <Photo {photo} />
   {/each}
