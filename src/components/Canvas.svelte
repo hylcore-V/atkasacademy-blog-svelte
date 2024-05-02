@@ -20,7 +20,7 @@
   });
 </script>
 
-<section class="w-full -m-sm bg-black" id="earthCanvas">
+<section class="w-full bg-black" id="earthCanvas">
   <div class="absolute bottom-0 w-full h-sm bg-gradient-to-t from-black" />
 
   <Canvas>
