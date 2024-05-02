@@ -3,44 +3,28 @@
   import { interactivity } from "@threlte/extras";
   import { spring } from "svelte/motion";
 
+  import Earth from "$components/Earth.svelte";
+
   interactivity();
-  const scale = spring(1)
+  const scale = spring(1);
+  const spinSpeed = 0.5;
 
   let rotation = 0;
-  useTask(delta => {
-    rotation += delta;
-  });
+  useTask(delta => rotation += spinSpeed * delta);
 </script>
 
 <T.PerspectiveCamera
   makeDefault
-  position={[10, 10, 10]}
-  on:create={({ ref }) => {
-    ref.lookAt(0, 1, 0);
-  }}
+  position={[0, 0, 1600]}
+  zoom={1}
+  on:create={({ ref }) => ref.lookAt(0, 0, 0)}
 />
 
-<T.DirectionalLight
-  position={[0, 10, 10]}
-  castShadow
-/>
+<T.DirectionalLight position={[0, 0, 10]} intensity={5} />
 
-<T.Mesh
-  position.y={1}
+<Earth
   rotation.y={rotation}
   scale={$scale}
-  on:pointerenter={() => scale.set(1.5)}
+  on:pointerenter={() => scale.set(1.2)}
   on:pointerleave={() => scale.set(1)}
-  castShadow
->
-  <T.BoxGeometry args={[1, 2, 1]} />
-  <T.MeshStandardMaterial color="hotpink" />
-</T.Mesh>
-
-<T.Mesh
-  rotation.x={-Math.PI / 2}
-  receiveShadow
->
-  <T.CircleGeometry args={[4, 40]} />
-  <T.MeshStandardMaterial color="white" />
-</T.Mesh>
+/>
