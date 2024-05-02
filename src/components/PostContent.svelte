@@ -1,6 +1,8 @@
 <script lang="ts">
-  import { extractSpotifyId } from "$lib/utils";
+  import { cn, extractSpotifyId } from "$lib/utils";
   import { onMount } from "svelte";
+  import { Collapsible } from "bits-ui";
+  import "iconify-icon";
   import {
     type ImageType,
     layouts,
@@ -8,6 +10,7 @@
     landscapeAspect,
     portraitAspect
   } from "$lib/imageLayouts";
+  import { slide } from "svelte/transition";
 
   export let content: string;
   export let podcast: string;
@@ -15,6 +18,7 @@
   let contentContainer: HTMLElement;
   let headings: NodeListOf<HTMLHeadingElement>;
   let imageGroup: HTMLImageElement[][] = [];
+  let isOutlineOpen = false;
 
   function scrollToSection(id: string) {
     const target = document.getElementById(id) as HTMLHeadingElement;
@@ -83,6 +87,33 @@
 </script>
 
 <section class="lg:mx-lg lg:my-sm space-y-8">
+  {#if headings && headings.length !== 0}
+    <Collapsible.Root class="w-full bg-neutral text-white" bind:open={isOutlineOpen}>
+      <Collapsible.Trigger class="flex justify-between w-full p-xxs">
+        <h3 class="font-jost font-semibold tracking-widest uppercase">Table of Contents</h3>
+        <iconify-icon icon="mdi:chevron-down" class={cn(
+          "text-2xl duration-200",
+          isOutlineOpen ? "rotate-0" : "rotate-180"
+        )}></iconify-icon>
+      </Collapsible.Trigger>
+
+      <Collapsible.Content transition={slide} class="bg-neutral-100 text-neutral py-2">
+        {#each headings as heading, i}
+          <button
+            on:click={() => scrollToSection(i.toString())}
+            class="text-sm font-semibold hover:bg-neutral-100 py-2 px-xxs w-full text-left flex items-center group"
+          >
+            <span>{heading.innerText}</span>
+            <iconify-icon
+              icon="mdi:chevron-right"
+              class="text-2xl duration-200 opacity-0 translate-x-0 group-hover:opacity-100 group-hover:translate-x-2"
+            ></iconify-icon>
+          </button>
+        {/each}
+      </Collapsible.Content>
+    </Collapsible.Root>
+  {/if}
+
   {#if podcast.length > 0}
     <iframe
       title="Spotify Player Embed"

@@ -16,7 +16,7 @@
   class="w-full flex items-center justify-center gap-2 mt-sm"
   {onPageChange}
 >
-  <Pagination.PrevButton class="inline-flex items-center justify-center disabled:text-neutral-400 disabled:cursor-not-allowed size-[2.5rem] hover:bg-neutral-200 rounded-md duration-150">
+  <Pagination.PrevButton class="inline-flex items-center justify-center disabled:text-neutral-400 disabled:cursor-not-allowed size-[2.5rem] hover:bg-neutral-100 rounded-md duration-150">
     <iconify-icon icon="mdi:chevron-left" class="text-2xl"></iconify-icon>
   </Pagination.PrevButton>
 
@@ -27,7 +27,7 @@
       {:else}
         <Pagination.Page
           {page}
-          class="inline-flex justify-center items-center size-[2.5rem] rounded-md hover:bg-neutral-200 data-[selected]:border-neutral data-[selected]:border data-[selected]:bg-neutral duration-150 data-[selected]:text-white font-normal"
+          class="inline-flex justify-center items-center size-[2.5rem] rounded-md hover:bg-neutral-100 data-[selected]:border-neutral data-[selected]:border data-[selected]:bg-neutral duration-150 data-[selected]:text-white font-normal"
         >
           {page.value}
         </Pagination.Page>
@@ -35,7 +35,7 @@
     {/each}
   </div>
 
-  <Pagination.NextButton class="inline-flex items-center justify-center disabled:text-neutral-400 disabled:cursor-not-allowed size-[2.5rem] hover:bg-neutral-200 rounded-md duration-150">
+  <Pagination.NextButton class="inline-flex items-center justify-center disabled:text-neutral-400 disabled:cursor-not-allowed size-[2.5rem] hover:bg-neutral-100 rounded-md duration-150">
     <iconify-icon icon="mdi:chevron-right" class="text-2xl"></iconify-icon>
   </Pagination.NextButton>
 </Pagination.Root>
