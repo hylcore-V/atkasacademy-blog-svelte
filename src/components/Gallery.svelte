@@ -63,7 +63,10 @@
                   {selectedPhoto?.fields.title}
                 </h1>
                 <h2 class="italic text-base">
-                  {selectedPhoto?.fields.city}, {selectedPhoto?.fields.country?.fields.short}
+                  <span>{selectedPhoto?.fields.city},</span>
+                  <a href="/destinations/{selectedPhoto?.fields.country?.fields.slug}">
+                    {selectedPhoto?.fields.country?.fields.short}
+                  </a>
                 </h2>
               </div>
 
