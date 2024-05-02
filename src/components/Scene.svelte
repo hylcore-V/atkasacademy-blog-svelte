@@ -20,11 +20,11 @@
   on:create={({ ref }) => ref.lookAt(0, 0, 0)}
 />
 
-<T.DirectionalLight position={[0, 0, 10]} intensity={5} />
+<T.AmbientLight intensity={5} />
 
 <Earth
   rotation.y={rotation}
   scale={$scale}
-  on:pointerenter={() => scale.set(1.2)}
+  on:pointerenter={() => scale.set(1.1)}
   on:pointerleave={() => scale.set(1)}
 />

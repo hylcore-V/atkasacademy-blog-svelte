@@ -12,7 +12,9 @@ import Canvas from "$components/Canvas.svelte";
     </div>
   </PageCover>
 
-  <section class="-m-sm">
+  <section class="-m-sm bg-black">
+    <div class="absolute bottom-0 w-full h-sm bg-gradient-to-t from-black" />
+
     <Canvas client:load />
   </section>
 </Layout>
