@@ -50,7 +50,8 @@
     />
 
     <Dialog.Content class="fixed z-50 w-full h-full inset-0 text-white pointer-events-none">
-      <div class="relative w-full h-full" on:keydown={keyPress} role="button" tabindex="0">
+      <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+      <div class="relative w-full h-full" on:keydown={keyPress} role="dialog">
         <Dialog.Close class="absolute top-xs right-xs pointer-events-auto size-xs">
           <iconify-icon icon="mdi:close" class="text-4xl"></iconify-icon>
         </Dialog.Close>
