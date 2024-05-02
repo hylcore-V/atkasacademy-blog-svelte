@@ -117,7 +117,7 @@
 
   {#if podcast.length > 0}
     <div class="p-xxs bg-neutral text-white font-semibold uppercase font-jost tracking-widest space-y-xxs">
-      <h3>Listen to this episode: </h3>
+      <h3>Listen to this episode</h3>
       <iframe
         title="Spotify Player Embed"
         src={`https://open.spotify.com/embed/episode/${extractSpotifyId(podcast)}?utm_source=generator&theme=0`}
