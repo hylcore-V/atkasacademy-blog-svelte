@@ -2,6 +2,7 @@
   "extends": "astro/tsconfigs/strict",
   "exclude": [ "node_modules/" ],
   "compilerOptions": {
+    "moduleResolution": "Bundler",
     "baseUrl": ".",
     "paths": {
       "$lib/*": ["src/lib/*"],

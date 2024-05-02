@@ -1,14 +1,10 @@
----
-interface Props {
-	src?: string;
-}
-
-const { src = "/covers/home.webp" } = Astro.props;
----
+<script lang="ts">
+  export let src = "/covers/home.webp";
+</script>
 
 <div
   class="h-screen w-screen bg-cover bg-center flex bg-fixed justify-center text-center text-white dim-image"
-  style={{ backgroundImage: `url("${src}")` }}
+  style:background-image="url('{src}')"
 >
   <div class="absolute bottom-44">
     <slot />

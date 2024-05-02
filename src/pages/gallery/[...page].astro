@@ -1,7 +1,7 @@
 ---
 import Layout from "$layouts/Layout.astro"
-import PageCover from "$components/PageCover.astro"
-import { contentfulClient, type BlogPost, type GalleryPhoto } from "$lib/contentful";
+import PageCover from "$components/PageCover.svelte"
+import { contentfulClient, type GalleryPhoto } from "$lib/contentful";
 import type { InferGetStaticPropsType, PaginateFunction } from "astro";
 import Gallery from "$components/Gallery.svelte";
 

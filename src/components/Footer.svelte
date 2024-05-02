@@ -1,7 +1,7 @@
----
-import "iconify-icon";
-import Separator from "./Separator.svelte";
----
+<script lang="ts">
+  import "iconify-icon";
+  import Separator from "./Separator.svelte";
+</script>
 
 <!-- Wavy footer -->
 <div class="bg-waves bg-white bg-cover bg-[center_bottom] bg-no-repeat w-full h-32 -my-0.5 duration-200"></div>

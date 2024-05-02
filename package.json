@@ -16,6 +16,12 @@
     "@contentful/rich-text-html-renderer": "^16.3.5",
     "@fontsource-variable/jost": "^5.0.19",
     "@tailwindcss/typography": "^0.5.13",
+    "@theatre/core": "^0.7.1",
+    "@theatre/studio": "^0.7.1",
+    "@threlte/core": "^7.3.0",
+    "@threlte/extras": "^8.11.2",
+    "@threlte/theatre": "^2.1.7",
+    "@types/three": "^0.164.0",
     "astro": "^4.7.0",
     "bits-ui": "^0.21.5",
     "clsx": "^2.1.1",
@@ -24,6 +30,7 @@
     "svelte": "^4.2.15",
     "tailwind-merge": "^2.3.0",
     "tailwindcss": "^3.4.3",
+    "three": "^0.164.1",
     "typescript": "^5.4.5"
   }
 }
