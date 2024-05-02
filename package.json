@@ -26,11 +26,15 @@
     "bits-ui": "^0.21.5",
     "clsx": "^2.1.1",
     "contentful": "^10.9.0",
+    "gsap": "^3.12.5",
     "iconify-icon": "^2.1.0",
     "svelte": "^4.2.15",
     "tailwind-merge": "^2.3.0",
     "tailwindcss": "^3.4.3",
     "three": "^0.164.1",
     "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@types/gsap": "^3.0.0"
   }
 }

@@ -11,6 +11,11 @@
   background-blend-mode: multiply;
 }
 
+canvas {
+  width: 100dvw;
+  height: 100dvh;
+}
+
 @font-face {
   font-family: "ZhanKu";
   src: url(/fonts/ZhanKu.ttf);

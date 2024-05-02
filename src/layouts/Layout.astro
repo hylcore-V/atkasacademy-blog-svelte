@@ -27,12 +27,13 @@ const { title } = Astro.props;
     <Navbar
       client:load
       isPost={Astro.url.pathname.startsWith("/posts/")}
+      isHome={Astro.url.pathname === "/"}
     />
 
     <!-- Page cover -->
     <slot name="before-content" />
 
-		<main class="m-sm">
+		<main class="m-sm w-full">
       <slot />
     </main>
 

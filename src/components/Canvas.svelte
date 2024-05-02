@@ -1,17 +1,30 @@
 <script lang="ts">
-  import { Canvas, HierarchicalObject } from "@threlte/core";
+  import { Canvas } from "@threlte/core";
   import Scene from "$components/Scene.svelte";
   import { onMount } from "svelte";
+  import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+  import gsap from "gsap";
 
-  let width = 0
-  let height = 0
+  let st: ScrollTrigger;
 
   onMount(() => {
-    width = window.innerWidth;
-    height = window.innerHeight;
+    gsap.registerPlugin(ScrollTrigger);
+
+    st = ScrollTrigger.create({
+      trigger: "#earthCanvas",
+      scrub: true,
+      pin: true,
+      start: "top top",
+      end: "+=100%",
+    });
   });
 </script>
 
-<Canvas size={{ width, height }}>
-  <Scene />
-</Canvas>
+<section class="w-full -m-sm bg-black" id="earthCanvas">
+  <div class="absolute bottom-0 w-full h-sm bg-gradient-to-t from-black" />
+
+  <Canvas>
+    <Scene {st} />
+  </Canvas>
+</section>
+

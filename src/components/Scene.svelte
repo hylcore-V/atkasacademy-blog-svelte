@@ -2,15 +2,21 @@
   import { T, useTask } from "@threlte/core";
   import { interactivity } from "@threlte/extras";
   import { spring } from "svelte/motion";
+  import type ScrollTrigger from "gsap/dist/ScrollTrigger";
+  import { degToRad } from "three/src/math/MathUtils.js";
 
   import Earth from "$components/Earth.svelte";
 
   interactivity();
   const scale = spring(1);
-  const spinSpeed = 0.5;
 
-  let rotation = 0;
-  useTask(delta => rotation += spinSpeed * delta);
+  export let st: ScrollTrigger;
+
+  const rotation = spring(0);
+
+  useTask(() => {
+    rotation.set(degToRad(st.progress * 360));
+  });
 </script>
 
 <T.PerspectiveCamera
@@ -23,7 +29,7 @@
 <T.AmbientLight intensity={5} />
 
 <Earth
-  rotation.y={rotation}
+  rotation.y={$rotation}
   scale={$scale}
   on:pointerenter={() => scale.set(1.1)}
   on:pointerleave={() => scale.set(1)}
