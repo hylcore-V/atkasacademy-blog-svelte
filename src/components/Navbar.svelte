@@ -112,5 +112,5 @@
 {#if isPost}
   <PostBar show={isScrolledScreen && scrollDirection === "down" && !isScrolledContent} />
 
-  <ScrollProgress {scrollPercent} />
+  <!-- <ScrollProgress {scrollPercent} /> -->
 {/if}
