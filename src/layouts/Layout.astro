@@ -9,9 +9,14 @@ import { cn } from "$lib/utils";
 interface Props {
 	title: string;
   padding?: boolean;
+  description: string;
 }
 
-const { title, padding = true } = Astro.props;
+const {
+  title = "Atlas Academy",
+  padding = true,
+  description = "The Atlas Academy blog"
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -23,6 +28,13 @@ const { title, padding = true } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+    <meta name="description" content={description}>
+    <script async type="module">
+      localStorage.theme === "dark" ||
+			(!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)
+				? document.documentElement.classList.add("dark")
+				: document.documentElement.classList.remove("dark");
+    </script>
 	</head>
 
 	<body class="h-full">
