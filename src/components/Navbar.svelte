@@ -52,7 +52,7 @@
   isScrolledScreen && (isHome ? true : scrollDirection === "down") ? "-top-[7rem]" : "top-0",
   {
     "text-white bg-transparent h-big-nav": isPageTop,
-    "text-neutral bg-white h-nav shadow-lg": !isPageTop,
+    "text-neutral dark:text-white bg-white dark:bg-neutral h-nav shadow-lg": !isPageTop,
   }
 )}>
   <header class={cn(
@@ -101,7 +101,7 @@
 <!-- Back to top button -->
 {#if !isPageTop && !isPageBottom && !isHome}
   <button
-    class="fixed bottom-8 right-8 text-2xl text-white rounded-full shadow-lg bg-neutral w-12 h-12 flex justify-center items-center z-10"
+    class="fixed bottom-8 right-8 text-2xl text-white rounded-full shadow-lg bg-neutral dark:bg-neutral-600 w-12 h-12 flex justify-center items-center z-10"
     on:click={scrollToTop}
     transition:fly={{ y: 80, duration: 300 }}>
     <iconify-icon icon="mdi:chevron-up"></iconify-icon>

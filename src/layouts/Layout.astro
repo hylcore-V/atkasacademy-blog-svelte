@@ -9,7 +9,7 @@ import { cn } from "$lib/utils";
 interface Props {
 	title: string;
   padding?: boolean;
-  description: string;
+  description?: string;
 }
 
 const {
@@ -37,7 +37,7 @@ const {
     </script>
 	</head>
 
-	<body class="h-full">
+	<body class="h-full bg-white dark:bg-neutral text-neutral dark:text-white duration-200">
     <Navbar
       client:load
       isPost={Astro.url.pathname.startsWith("/posts/")}

@@ -9,7 +9,7 @@
 <button class="group relative" on:click>
   <div
     style:background-image="url({image(photo.fields.image?.fields.file?.url)})"
-    class="aspect-square duration-200 w-full bg-cover bg-center bg-neutral-100 group-hover:brightness-50"
+    class="aspect-square duration-200 w-full bg-cover bg-center bg-neutral-100 dark:bg-neutral-600 group-hover:brightness-50"
   />
 
   <div class="w-4/5 absolute left-1/2 -translate-x-1/2 group-hover:-translate-y-1/2 group-hover:opacity-100 opacity-0 duration-200 top-1/2 text-white">
