@@ -9,9 +9,12 @@
 
   interactivity();
 
+  const rotation = spring(0);
+  const STARS_COUNT = 350;
+
   export let st: ScrollTrigger;
 
-  const rotation = spring(0);
+  let stars = [];
 
   useTask(() => {
     rotation.set(degToRad(st.progress * 360));
