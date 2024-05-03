@@ -1,18 +1,31 @@
 <script lang="ts">
   import type { BlogPost } from "$lib/contentful";
-  import type { Entry } from "contentful";
   import { image } from "$lib/utils";
+  import type { Entry } from "contentful";
   import "iconify-icon";
-  import Pagination from "$components/Pagination.svelte";
+  import { onMount } from "svelte";
+    import { fade } from "svelte/transition";
 
-  export let posts: Entry<BlogPost, "WITHOUT_UNRESOLVABLE_LINKS", string>[];
-  export let perPage: number;
-  export let totalPosts: number;
-  export let currPage: number;
+  const perPage = 20;
 
-  function onPageChange(page: number) {
-    window.location.href = `/blog/${page != 1 ? page : ""}`;
+  let page = 0;
+  let loading = true;
+  let posts: Entry<BlogPost, "WITHOUT_UNRESOLVABLE_LINKS", string>[] = [];
+
+  async function loadPage() {
+    loading = true;
+    const data = await fetch("/api/posts.json", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ perPage, page })
+    }).then(response => response.json());
+    loading = false;
+
+    posts = [...posts, ...data];
+    page++;
   }
+
+  onMount(loadPage);
 </script>
 
 <!-- Grid of posts -->
@@ -31,4 +44,12 @@
   {/each}
 </section>
 
-<Pagination {perPage} {totalPosts} {currPage} {onPageChange} />
+{#if loading}
+  <div class="w-full mt-sm flex justify-center" transition:fade>
+    <iconify-icon icon="mdi:loading" class="text-4xl animate-spin"></iconify-icon>
+  </div>
+{/if}
+
+<button on:click={loadPage}>
+  Load
+</button>
