@@ -6,7 +6,7 @@
 <!-- Wavy footer -->
 <div class="bg-waves dark:bg-dark-waves bg-white dark:bg-neutral bg-cover bg-[center_bottom] bg-no-repeat w-full h-32 -my-0.5 duration-200"></div>
 
-<footer class="bg-footer dark:bg-dark-footer py-xs px-sm flex flex-col items-center duration-200">
+<footer class="bg-footer dark:bg-dark-footer py-xs px-sm flex flex-col items-center duration-200" id="footer">
   <section class="w-full flex justify-between items-center">
     <!-- Podcast links -->
     <div class="space-y-2">

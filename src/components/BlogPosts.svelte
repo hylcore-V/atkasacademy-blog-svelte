@@ -4,15 +4,19 @@
   import type { Entry } from "contentful";
   import "iconify-icon";
   import { onMount } from "svelte";
-    import { fade } from "svelte/transition";
 
-  const perPage = 20;
+  const perPage = 12;
 
   let page = 0;
-  let loading = true;
+  let loading = false;
+  let loadedAll = false;
   let posts: Entry<BlogPost, "WITHOUT_UNRESOLVABLE_LINKS", string>[] = [];
+  let observer: IntersectionObserver;
 
   async function loadPage() {
+    if (loading || loadedAll) return;
+
+    console.log("page loaded");
     loading = true;
     const data = await fetch("/api/posts.json", {
       method: "POST",
@@ -21,11 +25,23 @@
     }).then(response => response.json());
     loading = false;
 
+    if (data.length === 0) {
+      loadedAll = true;
+      return;
+    }
+
     posts = [...posts, ...data];
     page++;
   }
 
-  onMount(loadPage);
+  onMount(() => {
+    const footer = document.getElementById("footer");
+    observer = new IntersectionObserver(loadPage, {
+      root: null,
+      threshold: 0,
+    });
+    if (footer) observer.observe(footer);
+  });
 </script>
 
 <!-- Grid of posts -->
@@ -45,7 +61,7 @@
 </section>
 
 {#if loading}
-  <div class="w-full mt-sm flex justify-center" transition:fade>
+  <div class="w-full mt-sm flex justify-center">
     <iconify-icon icon="mdi:loading" class="text-4xl animate-spin"></iconify-icon>
   </div>
 {/if}
