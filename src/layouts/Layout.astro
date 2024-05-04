@@ -29,7 +29,7 @@ const {
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
     <meta name="description" content={description}>
-    <script async type="module">
+    <script is:inline type="module">
       localStorage.theme === "dark" ||
 			(!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)
 				? document.documentElement.classList.add("dark")
