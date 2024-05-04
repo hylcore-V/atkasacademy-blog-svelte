@@ -44,6 +44,19 @@
   });
 </script>
 
+<div class="flex h-12 mb-xs">
+  <div class="flex items-center flex-grow h-full bg-neutral-200 dark:bg-white text-black rounded-l-md pl-xxs">
+    <input class="h-full w-full outline-none bg-inherit" />
+    <button class="flex items-center h-full gap-1 rounded-md px-xxs uppercase font-jost tracking-widest font-medium text-sm">
+      <iconify-icon icon="mdi:filter-variant" class="text-xl"></iconify-icon>
+      Filter
+    </button>
+  </div>
+  <button class="bg-neutral dark:bg-neutral-600 text-white rounded-r-md px-xxs text-sm flex items-center gap-1">
+    <iconify-icon icon="mdi:magnify" class="text-xl"></iconify-icon>
+  </button>
+</div>
+
 <!-- Grid of posts -->
 <section class="text-neutral dark:text-white grid grid-cols-4 gap-xxs">
   {#each posts as item}
