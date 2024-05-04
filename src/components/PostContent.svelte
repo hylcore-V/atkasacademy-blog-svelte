@@ -118,7 +118,7 @@
   {/if}
 
   {#if podcast.length > 0}
-    <div class="p-xxs bg-neutral-600 text-white font-semibold uppercase font-jost tracking-widest space-y-xxs rounded-md">
+    <div class="p-xxs bg-neutral dark:bg-neutral-600 text-white font-semibold uppercase font-jost tracking-widest space-y-xxs rounded-md">
       <h3>Listen to this episode</h3>
       <iframe
         title="Spotify Player Embed"
