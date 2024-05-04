@@ -1,0 +1,13 @@
+---
+import GalleryGrid from "$components/Gallery.svelte";
+import PageCover from "$components/PageCover.svelte";
+import Layout from "$layouts/Layout.astro";
+---
+
+<Layout title="Blog">
+  <PageCover src="/covers/gallery.jpg" slot="before-content">
+    <h1 class="text-3xl uppercase font-jost tracking-widest font-semibold">Gallery</h1>
+  </PageCover>
+
+  <GalleryGrid client:load />
+</Layout>

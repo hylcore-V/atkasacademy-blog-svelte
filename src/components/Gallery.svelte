@@ -1,16 +1,19 @@
 <script lang="ts">
   import type { GalleryPhoto } from "$lib/contentful";
   import type { Entry } from "contentful";
-  import Pagination from "$components/Pagination.svelte";
-  import Photo from "$components/Photo.svelte";
   import { Dialog } from "bits-ui";
   import { fade } from "svelte/transition";
   import { clamp, cn } from "$lib/utils";
+  import Photo from "$components/Photo.svelte";
+    import { onMount } from "svelte";
 
-  export let perPage: number;
-  export let gallery: Entry<GalleryPhoto, "WITHOUT_UNRESOLVABLE_LINKS", string>[];
-  export let totalPosts: number;
-  export let currPage: number;
+  const perPage = 20;
+
+  let page = 0;
+  let loading = false;
+  let loadedAll = false;
+  let gallery: Entry<GalleryPhoto, "WITHOUT_UNRESOLVABLE_LINKS", string>[] = [];
+  let observer: IntersectionObserver;
 
   let selectedIndex: number = -1;
   let selectedPhoto: Entry<GalleryPhoto, "WITHOUT_UNRESOLVABLE_LINKS", string> | null = null;
@@ -18,8 +21,25 @@
 
   $: if (selectedIndex !== -1) selectedPhoto = gallery[selectedIndex];
 
-  function onPageChange(page: number) {
-    window.location.href = `/gallery/${page != 1 ? page : ""}`;
+  async function loadPage() {
+    if (loading || loadedAll) return;
+
+    console.log("page loaded");
+    loading = true;
+    const data = await fetch("/api/gallery.json", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ perPage, page })
+    }).then(response => response.json());
+    loading = false;
+
+    if (data.length === 0) {
+      loadedAll = true;
+      return;
+    }
+
+    gallery = [...gallery, ...data];
+    page++;
   }
 
   function changePhoto(direction: -1 | 1) {
@@ -30,6 +50,15 @@
     if (e.code === "ArrowRight") changePhoto(1);
     else if (e.code === "ArrowLeft") changePhoto(-1);
   }
+
+  onMount(() => {
+    const footer = document.getElementById("footer");
+    observer = new IntersectionObserver(loadPage, {
+      root: null,
+      threshold: 0.2,
+    });
+    if (footer) observer.observe(footer);
+  });
 </script>
 
 <!-- Grid of photos -->
@@ -39,7 +68,11 @@
   {/each}
 </section>
 
-<Pagination {perPage} {totalPosts} {currPage} {onPageChange} />
+{#if loading}
+  <div class="w-full mt-sm flex justify-center">
+    <iconify-icon icon="mdi:loading" class="text-4xl animate-spin"></iconify-icon>
+  </div>
+{/if}
 
 <Dialog.Root open={selectedPhoto !== null}>
   <Dialog.Portal>

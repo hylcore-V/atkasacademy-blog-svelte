@@ -38,7 +38,7 @@
     const footer = document.getElementById("footer");
     observer = new IntersectionObserver(loadPage, {
       root: null,
-      threshold: 0,
+      threshold: 0.2,
     });
     if (footer) observer.observe(footer);
   });
@@ -65,7 +65,3 @@
     <iconify-icon icon="mdi:loading" class="text-4xl animate-spin"></iconify-icon>
   </div>
 {/if}
-
-<button on:click={loadPage}>
-  Load
-</button>
