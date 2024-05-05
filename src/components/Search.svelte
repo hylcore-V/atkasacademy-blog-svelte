@@ -1,5 +1,6 @@
 <script lang="ts">
-  import type { EventHandler } from "svelte/elements";
+  import { Popover } from "bits-ui";
+  import DestinationSearch from "$components/DestinationSearch.svelte";
 
   export let query = "";
   export let search: (query: string) => void;
@@ -17,12 +18,23 @@
       bind:value={query}
     />
 
-    <button
-      class="flex items-center h-full gap-1 rounded-md px-xxs uppercase font-jost tracking-widest font-medium text-sm"
-    >
-      <iconify-icon icon="mdi:filter-variant" class="text-xl"></iconify-icon>
-      Filter
-    </button>
+    <Popover.Root>
+      <Popover.Trigger class="flex items-center h-full gap-1 rounded-md px-xxs uppercase font-jost tracking-widest font-medium text-sm">
+        <iconify-icon icon="mdi:filter-variant" class="text-xl"></iconify-icon>
+        <span>Filter</span>
+      </Popover.Trigger>
+
+      <Popover.Content
+        class="flex flex-col gap-xxs items-start bg-white text-neutral rounded-md w-lg h-lg p-xxs shadow-lg"
+        sideOffset={8}
+        align="start"
+      >
+        <h2 class="uppercase font-jost font-medium text-sm tracking-widest">
+          Destinations
+        </h2>
+        <DestinationSearch />
+      </Popover.Content>
+    </Popover.Root>
   </form>
 
   <button
