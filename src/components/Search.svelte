@@ -25,11 +25,11 @@
       </Popover.Trigger>
 
       <Popover.Content
-        class="flex flex-col gap-xxs items-start bg-white text-neutral rounded-md w-lg h-lg p-xxs shadow-lg"
+        class="flex flex-col gap-xxs items-start bg-white dark:bg-neutral text-neutral dark:text-white rounded-md w-[20rem] h-lg p-xxs shadow-lg"
         sideOffset={8}
         align="start"
       >
-        <h2 class="uppercase font-jost font-medium text-sm tracking-widest">
+        <h2 class="uppercase font-jost font-medium tracking-widest">
           Destinations
         </h2>
         <DestinationSearch />
