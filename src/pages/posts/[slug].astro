@@ -66,7 +66,7 @@ const { content, title, date, cover, destination, podcast } = Astro.props;
 
 <Layout {title}>
   <PageCover src={cover} slot="before-content">
-    <div class="uppercase font-normal text-lg font-jost tracking-widest space-y-xxs">
+    <div class="uppercase font-normal text-lg font-jost tracking-widest space-y-xxs px-md">
       <time class="inline">{date}</time>
       <span>|</span>
       <a href={`/destinations/${destination}`} class="inline">
