@@ -5,7 +5,7 @@
   import { fade } from "svelte/transition";
   import { clamp, cn } from "$lib/utils";
   import Photo from "$components/Photo.svelte";
-    import { onMount } from "svelte";
+  import { onMount } from "svelte";
 
   const perPage = 20;
 
@@ -24,13 +24,14 @@
   async function loadPage() {
     if (loading || loadedAll) return;
 
-    console.log("page loaded");
     loading = true;
+
     const data = await fetch("/api/gallery.json", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ perPage, page })
     }).then(response => response.json());
+
     loading = false;
 
     if (data.length === 0) {
@@ -40,6 +41,7 @@
 
     gallery = [...gallery, ...data];
     page++;
+    selectedIndex = -1;
   }
 
   function changePhoto(direction: -1 | 1) {
