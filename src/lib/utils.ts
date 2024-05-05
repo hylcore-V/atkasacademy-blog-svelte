@@ -19,7 +19,7 @@ export function formatDate(dateString: string) {
   return `${day} ${month} ${year}`;
 }
 
-export function clamp(num: number, min: number, max: number) {
+export function clamp(num: number, min: number, max: number = Infinity) {
   return Math.min(Math.max(num, min), max);
 }
 

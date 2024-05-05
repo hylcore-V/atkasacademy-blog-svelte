@@ -2,13 +2,13 @@
   import { Pagination } from "bits-ui";
 
   export let perPage: number;
-  export let totalPosts: number;
+  export let count: number;
   export let currPage: number;
   export let onPageChange: (page: number) => void;
 </script>
 
 <Pagination.Root
-  count={totalPosts}
+  count={count}
   {perPage}
   page={currPage}
   let:pages

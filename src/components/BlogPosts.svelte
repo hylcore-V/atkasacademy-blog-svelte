@@ -1,9 +1,10 @@
 <script lang="ts">
   import type { BlogPost } from "$lib/contentful";
-  import { image } from "$lib/utils";
+  import { clamp, image } from "$lib/utils";
   import type { Entry } from "contentful";
   import "iconify-icon";
   import { onMount } from "svelte";
+  import Pagination from "./Pagination.svelte";
 
   export let page: number;
   export let query: string | null;
@@ -12,20 +13,30 @@
 
   let loading = false;
   let queryInput = query;
+  let allPosts: Entry<BlogPost, "WITHOUT_UNRESOLVABLE_LINKS", string>[] = [];
   let posts: Entry<BlogPost, "WITHOUT_UNRESOLVABLE_LINKS", string>[] = [];
 
   function search() {
-    window.location.href = `/blog?page=${page}&q=${queryInput}`;
+    if (!queryInput) return;
+    const query = encodeURIComponent(queryInput);
+    window.location.href = `/blog?page=1&q=${query}`;
+  }
+
+  function pageChange(page: number) {
+    window.location.href = `/blog?page=${page}&q=${query}`;
   }
 
   onMount(async () => {
     loading = true;
 
-    posts = await fetch("/api/posts.json", {
+    allPosts = await fetch("/api/posts.json", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ perPage, page, query })
-    }).then(response => response.json());
+      body: JSON.stringify({ query })
+    }).then(response => response.json()) as Entry<BlogPost, "WITHOUT_UNRESOLVABLE_LINKS", string>[];
+
+    const clampedPage = clamp(page - 1, 0);
+    posts = allPosts.slice(clampedPage * perPage, (clampedPage + 1) * perPage);
 
     loading = false;
   });
@@ -72,10 +83,19 @@
   {/each}
 </section>
 
-{#if posts.length === 0 && !loading}
-  <div class="flex justify-center items-center font-semibold text-xl">
-    Sorry, it looks like no posts were found for your search :(
-  </div>
+{#if !loading}
+  {#if posts.length > 0}
+    <Pagination
+      {perPage}
+      count={allPosts.length}
+      currPage={page}
+      onPageChange={pageChange}
+    />
+  {:else}
+    <div class="flex justify-center items-center font-semibold text-xl">
+      Sorry, it looks like no posts were found for your search :(
+    </div>
+  {/if}
 {/if}
 
 {#if loading}
