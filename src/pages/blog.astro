@@ -7,8 +7,12 @@ import Layout from "$layouts/Layout.astro";
 
 const params = Astro.url.searchParams;
 const pageParam = params.get("page");
-const page = pageParam ? +pageParam : 0;
-const query = params.get("q");
+const page = pageParam ? +pageParam : -1;
+const query = params.get("q") || "";
+
+if (page === -1) {
+  Astro.redirect("/blog?page=1");
+}
 ---
 
 <Layout title="Blog">

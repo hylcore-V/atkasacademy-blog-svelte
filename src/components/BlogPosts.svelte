@@ -4,22 +4,23 @@
   import type { Entry } from "contentful";
   import "iconify-icon";
   import { onMount } from "svelte";
-  import Pagination from "./Pagination.svelte";
+
+  import Pagination from "$components/Pagination.svelte";
+	import Search from "$components/Search.svelte";
 
   export let page: number;
-  export let query: string | null;
+  export let query: string;
 
   const perPage = 12;
 
   let loading = true;
-  let queryInput = query;
   let allPosts: Entry<BlogPost, "WITHOUT_UNRESOLVABLE_LINKS", string>[] = [];
   let posts: Entry<BlogPost, "WITHOUT_UNRESOLVABLE_LINKS", string>[] = [];
 
-  function search() {
-    if (!queryInput) return;
-    const query = encodeURIComponent(queryInput);
-    window.location.href = `/blog?page=1&q=${query}`;
+  function search(query: string) {
+    if (!query) return;
+    const q = encodeURIComponent(query);
+    window.location.href = `/blog?page=1&q=${q}`;
   }
 
   function pageChange(page: number) {
@@ -42,34 +43,7 @@
   });
 </script>
 
-<div class="flex h-12 mb-xs">
-  <form
-    on:submit|preventDefault={search}
-    class="flex items-center flex-grow h-full bg-neutral-200 dark:bg-white text-black rounded-l-md pl-xxs"
-  >
-    <input
-      type="text"
-      class="h-full w-full outline-none bg-inherit"
-      placeholder="Search for posts..."
-      bind:value={queryInput}
-    />
-
-    <button
-      on:click|preventDefault
-      class="flex items-center h-full gap-1 rounded-md px-xxs uppercase font-jost tracking-widest font-medium text-sm"
-    >
-      <iconify-icon icon="mdi:filter-variant" class="text-xl"></iconify-icon>
-      Filter
-    </button>
-  </form>
-
-  <button
-    type="submit"
-    class="bg-neutral dark:bg-neutral-600 text-white rounded-r-md px-xxs text-sm flex items-center gap-1"
-  >
-    <iconify-icon icon="mdi:magnify" class="text-xl"></iconify-icon>
-  </button>
-</div>
+<Search {search} />
 
 <!-- Grid of posts -->
 <section class="text-neutral dark:text-white grid grid-cols-4 gap-xxs">
