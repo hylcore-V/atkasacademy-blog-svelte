@@ -65,7 +65,7 @@
     >
       <div
         style:background-image="url({image(item.fields.cover?.fields.file?.url)})"
-        class="h-40 bg-cover bg-center group-hover:brightness-75 duration-200"
+        class="h-40 bg-cover bg-center group-hover:brightness-75 duration-200 rounded-md"
       ></div>
       <h3 class="font-[500]">{item.fields.title}</h3>
     </a>
