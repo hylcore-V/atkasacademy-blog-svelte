@@ -11,7 +11,7 @@
 
   const perPage = 12;
 
-  let loading = false;
+  let loading = true;
   let queryInput = query;
   let allPosts: Entry<BlogPost, "WITHOUT_UNRESOLVABLE_LINKS", string>[] = [];
   let posts: Entry<BlogPost, "WITHOUT_UNRESOLVABLE_LINKS", string>[] = [];
@@ -55,14 +55,18 @@
     />
 
     <button
-      type="submit"
+      on:click|preventDefault
       class="flex items-center h-full gap-1 rounded-md px-xxs uppercase font-jost tracking-widest font-medium text-sm"
     >
       <iconify-icon icon="mdi:filter-variant" class="text-xl"></iconify-icon>
       Filter
     </button>
   </form>
-  <button class="bg-neutral dark:bg-neutral-600 text-white rounded-r-md px-xxs text-sm flex items-center gap-1">
+
+  <button
+    type="submit"
+    class="bg-neutral dark:bg-neutral-600 text-white rounded-r-md px-xxs text-sm flex items-center gap-1"
+  >
     <iconify-icon icon="mdi:magnify" class="text-xl"></iconify-icon>
   </button>
 </div>
