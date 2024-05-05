@@ -12,7 +12,6 @@
   {perPage}
   page={currPage}
   let:pages
-  let:range
   class="w-full flex items-center justify-center gap-2 mt-sm"
   {onPageChange}
 >

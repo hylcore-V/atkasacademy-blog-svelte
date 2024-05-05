@@ -5,53 +5,52 @@
   import "iconify-icon";
   import { onMount } from "svelte";
 
+  export let page: number;
+  export let query: string | null;
+
   const perPage = 12;
 
-  let page = 0;
   let loading = false;
-  let loadedAll = false;
+  let queryInput = query;
   let posts: Entry<BlogPost, "WITHOUT_UNRESOLVABLE_LINKS", string>[] = [];
-  let observer: IntersectionObserver;
 
-  async function loadPage() {
-    if (loading || loadedAll) return;
-
-    console.log("page loaded");
-    loading = true;
-    const data = await fetch("/api/posts.json", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ perPage, page })
-    }).then(response => response.json());
-    loading = false;
-
-    if (data.length === 0) {
-      loadedAll = true;
-      return;
-    }
-
-    posts = [...posts, ...data];
-    page++;
+  function search() {
+    window.location.href = `/blog?page=${page}&q=${queryInput}`;
   }
 
-  onMount(() => {
-    const footer = document.getElementById("footer");
-    observer = new IntersectionObserver(loadPage, {
-      root: null,
-      threshold: 0.2,
-    });
-    if (footer) observer.observe(footer);
+  onMount(async () => {
+    loading = true;
+
+    posts = await fetch("/api/posts.json", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ perPage, page, query })
+    }).then(response => response.json());
+
+    loading = false;
   });
 </script>
 
 <div class="flex h-12 mb-xs">
-  <div class="flex items-center flex-grow h-full bg-neutral-200 dark:bg-white text-black rounded-l-md pl-xxs">
-    <input class="h-full w-full outline-none bg-inherit" />
-    <button class="flex items-center h-full gap-1 rounded-md px-xxs uppercase font-jost tracking-widest font-medium text-sm">
+  <form
+    on:submit|preventDefault={search}
+    class="flex items-center flex-grow h-full bg-neutral-200 dark:bg-white text-black rounded-l-md pl-xxs"
+  >
+    <input
+      type="text"
+      class="h-full w-full outline-none bg-inherit"
+      placeholder="Search for posts..."
+      bind:value={queryInput}
+    />
+
+    <button
+      type="submit"
+      class="flex items-center h-full gap-1 rounded-md px-xxs uppercase font-jost tracking-widest font-medium text-sm"
+    >
       <iconify-icon icon="mdi:filter-variant" class="text-xl"></iconify-icon>
       Filter
     </button>
-  </div>
+  </form>
   <button class="bg-neutral dark:bg-neutral-600 text-white rounded-r-md px-xxs text-sm flex items-center gap-1">
     <iconify-icon icon="mdi:magnify" class="text-xl"></iconify-icon>
   </button>
@@ -72,6 +71,12 @@
     </a>
   {/each}
 </section>
+
+{#if posts.length === 0 && !loading}
+  <div class="flex justify-center items-center font-semibold text-xl">
+    Sorry, it looks like no posts were found for your search :(
+  </div>
+{/if}
 
 {#if loading}
   <div class="w-full mt-sm flex justify-center">

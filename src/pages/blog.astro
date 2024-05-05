@@ -1,7 +1,14 @@
 ---
+export const prerender = false;
+
 import BlogPosts from "$components/BlogPosts.svelte";
 import PageCover from "$components/PageCover.svelte";
 import Layout from "$layouts/Layout.astro";
+
+const params = Astro.url.searchParams;
+const pageParam = params.get("page");
+const page = pageParam ? +pageParam : 0;
+const query = params.get("q");
 ---
 
 <Layout title="Blog">
@@ -9,5 +16,5 @@ import Layout from "$layouts/Layout.astro";
     <h1 class="text-3xl uppercase font-jost tracking-widest font-semibold">Blog</h1>
   </PageCover>
 
-  <BlogPosts client:load />
+  <BlogPosts client:load {page} {query} />
 </Layout>
