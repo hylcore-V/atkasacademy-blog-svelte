@@ -25,7 +25,7 @@
       </Label.Root>
       <textarea
         name="Add Comment"
-        class="block w-full outline-none p-2 bg-neutral-100 text-neutral rounded-md"
+        class="block w-full outline-none p-2 bg-neutral-100 text-neutral"
         id="body"
         rows={5}
         required
@@ -38,7 +38,7 @@
       </Label.Root>
       <input
         type="text"
-        class="block w-full outline-none p-2 bg-neutral-100 text-neutral rounded-md"
+        class="block w-full outline-none p-2 bg-neutral-100 text-neutral"
         id="author"
         required
       />
@@ -47,7 +47,7 @@
     <input
       type="submit"
       value="Post Comment"
-      class="uppercase tracking-widest font-jost font-semibold bg-neutral dark:bg-neutral-100 p-xxs px-xs text-sm text-white dark:text-neutral cursor-pointer rounded-md"
+      class="uppercase tracking-widest font-jost font-semibold bg-neutral dark:bg-neutral-100 p-xxs px-xs text-sm text-white dark:text-neutral cursor-pointer"
     />
   </form>
 </section>

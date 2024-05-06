@@ -9,14 +9,14 @@
 <div class="flex h-12 mb-xs">
   <button
     type="submit"
-    class="bg-neutral dark:bg-neutral-600 text-white rounded-l-md px-xxs text-sm flex items-center gap-1"
+    class="bg-neutral dark:bg-neutral-600 text-white px-xxs text-sm flex items-center gap-1"
   >
     <iconify-icon icon="mdi:magnify" class="text-xl"></iconify-icon>
   </button>
 
   <form
     on:submit|preventDefault={() => search(query)}
-    class="flex items-center flex-grow h-full bg-neutral-200 dark:bg-white text-black rounded-r-md pl-xxs"
+    class="flex items-center flex-grow h-full bg-neutral-200 dark:bg-white text-black pl-xxs"
   >
     <input
       type="text"

@@ -85,9 +85,9 @@
   });
 </script>
 
-<section class="lg:mx-lg lg:my-sm space-y-8">
+<section class="lg:mx-lg space-y-8">
   {#if headings && headings.length !== 0}
-    <Collapsible.Root class="w-full bg-neutral dark:bg-neutral-600 text-white rounded-md" bind:open={isOutlineOpen}>
+    <Collapsible.Root class="w-full bg-neutral dark:bg-neutral-600 text-white rounde-md" bind:open={isOutlineOpen}>
       <Collapsible.Trigger class="flex justify-between w-full p-xxs">
         <h3 class="font-jost font-semibold tracking-widest uppercase">
           Table of Contents
@@ -98,7 +98,7 @@
         )}></iconify-icon>
       </Collapsible.Trigger>
 
-      <Collapsible.Content transition={slide} class="bg-neutral-100 dark:bg-neutral-600 text-neutral dark:text-white py-2 rounded-b-md">
+      <Collapsible.Content transition={slide} class="bg-neutral-100 dark:bg-neutral-600 text-neutral dark:text-white py-2 rounde-b-md">
         {#each headings as heading, i}
           <button
             on:click={() => scrollToSection(i.toString())}
@@ -118,7 +118,7 @@
   {/if}
 
   {#if podcast.length > 0}
-    <div class="p-xxs bg-neutral dark:bg-neutral-600 text-white font-semibold uppercase font-jost tracking-widest space-y-xxs rounded-md">
+    <div class="p-xxs bg-neutral dark:bg-neutral-600 text-white font-semibold uppercase font-jost tracking-widest space-y-xxs rounde-md">
       <h3>Listen to this episode</h3>
       <iframe
         title="Spotify Player Embed"
@@ -132,7 +132,7 @@
 
   <article
     bind:this={contentContainer}
-    class="prose prose-neutral max-w-none prose-img:my-0 prose-img:rounded-md prose-h1:mt-sm prose-h1:font-jost prose-p:text-neutral dark:prose-p:text-white prose-headings:text-neutral dark:prose-headings:text-white"
+    class="prose prose-neutral max-w-none prose-img:my-0 prose-h1:mt-sm prose-h1:font-jost prose-p:text-neutral dark:prose-p:text-white prose-headings:text-neutral dark:prose-headings:text-white"
   >
     {@html content}
   </article>
