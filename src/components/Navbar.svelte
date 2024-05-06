@@ -6,6 +6,7 @@
 
   import ThemeButton from "$components/ThemeButton.svelte";
   import PostBar from "$components/PostBar.svelte";
+  import DestinationDropdown from "$components/DestinationDropdown.svelte";
 
   export let isPost: boolean;
   export let isHome: boolean;
@@ -62,7 +63,7 @@
   <!-- Navigation -->
   <div class="font-jost font-semibold uppercase tracking-widest text-xs gap-8 items-center duration-200 h-full flex">
     <a href="/">Home</a>
-    <a href="/destinations">Destinations</a>
+    <DestinationDropdown />
     <a href="/blog">Blog</a>
     <a href="/gallery">Gallery</a>
     <a href="/about">About</a>
@@ -108,6 +109,4 @@
 <!-- Liking and comments bar on posts only -->
 {#if isPost}
   <PostBar show={isScrolledScreen && scrollDirection === "down" && !isScrolledContent} />
-
-  <!-- <ScrollProgress {scrollPercent} /> -->
 {/if}
