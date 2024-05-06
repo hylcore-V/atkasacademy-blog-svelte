@@ -43,7 +43,7 @@
   });
 </script>
 
-<Search {search} />
+<Search {search} {query} />
 
 <!-- Grid of posts -->
 <section class="text-neutral dark:text-white grid grid-cols-4 gap-xxs">

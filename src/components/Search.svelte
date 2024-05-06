@@ -2,14 +2,21 @@
   import { Popover } from "bits-ui";
   import DestinationSearch from "$components/DestinationSearch.svelte";
 
-  export let query = "";
+  export let query: string;
   export let search: (query: string) => void;
 </script>
 
 <div class="flex h-12 mb-xs">
+  <button
+    type="submit"
+    class="bg-neutral dark:bg-neutral-600 text-white rounded-l-md px-xxs text-sm flex items-center gap-1"
+  >
+    <iconify-icon icon="mdi:magnify" class="text-xl"></iconify-icon>
+  </button>
+
   <form
     on:submit|preventDefault={() => search(query)}
-    class="flex items-center flex-grow h-full bg-neutral-200 dark:bg-white text-black rounded-l-md pl-xxs"
+    class="flex items-center flex-grow h-full bg-neutral-200 dark:bg-white text-black rounded-r-md pl-xxs"
   >
     <input
       type="text"
@@ -17,6 +24,15 @@
       placeholder="Search for posts..."
       bind:value={query}
     />
+
+    {#if query}
+      <button
+        on:click={() => (query = "")}
+        class="text-xl flex items-center justify-center aspect-square ml-2"
+      >
+        <iconify-icon icon="mdi:close"></iconify-icon>
+      </button>
+    {/if}
 
     <Popover.Root>
       <Popover.Trigger class="flex items-center h-full gap-1 rounded-md px-xxs uppercase font-jost tracking-widest font-medium text-sm">
@@ -36,11 +52,4 @@
       </Popover.Content>
     </Popover.Root>
   </form>
-
-  <button
-    type="submit"
-    class="bg-neutral dark:bg-neutral-600 text-white rounded-r-md px-xxs text-sm flex items-center gap-1"
-  >
-    <iconify-icon icon="mdi:magnify" class="text-xl"></iconify-icon>
-  </button>
 </div>
