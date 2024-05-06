@@ -64,7 +64,7 @@
   <div class="font-jost font-semibold uppercase tracking-widest text-xs gap-8 items-center duration-200 h-full flex">
     <a href="/">Home</a>
     <DestinationDropdown />
-    <a href="/blog">Blog</a>
+    <a href="/blog?page=1">Blog</a>
     <a href="/gallery">Gallery</a>
     <a href="/about">About</a>
 
