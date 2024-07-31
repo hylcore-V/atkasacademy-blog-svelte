@@ -20,14 +20,14 @@
     {#each destinations as destination}
       <a
         href={destination.url}
-        class="hover:bg-neutral-600 p-2 duration-150"
+        class="hover:bg-neutral-600 hover:text-white p-2 duration-150"
       >
         {destination.name}
       </a>
     {/each}
     <a
       href="/destinations"
-      class="hover:bg-neutral-600 p-2 duration-150 flex items-center gap-2"
+      class="hover:bg-neutral-600 hover:text-white p-2 duration-150 flex items-center gap-2"
     >
       <iconify-icon icon="mdi:plus-circle-outline" class="text-xl"></iconify-icon>
       <span>更多 MORE PLACES</span>
