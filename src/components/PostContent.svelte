@@ -20,17 +20,63 @@
   let headings: NodeListOf<HTMLHeadingElement>;
   let imageGroup: HTMLImageElement[][] = [];
   let isOutlineOpen = false;
+  let imagesLoaded: number[];
 
   function scrollToSection(id: string) {
     const target = document.getElementById(id) as HTMLHeadingElement;
     window.scrollTo(0, target.offsetTop - 100);
   }
 
+  function layoutImages(groupIndex: number) {
+    console.log("Layout images", groupIndex);
+    const group = imageGroup[groupIndex];
+    const imageTypes: ImageType[] = group.map(
+      image => image.naturalWidth > image.naturalHeight ? "landscape" : "portrait"
+    );
+
+    // Getting the correct image layout based on how many images and orientation
+    const layoutSize = layouts[group.length];
+    const layout = layoutSize.find(layout => layout.order.toString() === imageTypes.toString());
+
+    // Set properties for CSS grid
+    layout?.grid.forEach((item, i) => {
+      group[i].style.gridRow = `${item.rowStart} / ${item.rowEnd}`;
+      group[i].style.gridColumn = `${item.colStart} / ${item.colEnd}`;
+    });
+
+    const wrapper = document.createElement("div");
+    wrapper.style.display = "grid";
+    wrapper.style.gap = "0.5rem";
+
+    // Adding the images in the group to a wrapper grid
+    group[0].parentNode?.insertBefore(wrapper, group[0]);
+    group.forEach((image, i) => {
+      if (layout?.grid[i].colEnd === 3) {
+        image.style.aspectRatio = longAspect;
+      } else if (image.naturalWidth >= image.naturalHeight) {
+        image.style.aspectRatio = landscapeAspect;
+      } else {
+        image.style.aspectRatio = portraitAspect;
+      }
+
+      wrapper.appendChild(image);
+    });
+  }
+
   onMount(() => {
+    headings = contentContainer.querySelectorAll("h1");
+
+    if (headings) {
+      headings.forEach((heading, i) => {
+        heading.id = i.toString();
+      });
+    }
+
     let tempImages: HTMLImageElement[] = [];
     const images = Array.from(contentContainer.querySelectorAll("img"));
 
     // Grouping images that are next to each other
+    imagesLoaded = Array(images.length).fill(0);
     images.forEach(image => {
       tempImages.push(image);
 
@@ -41,51 +87,22 @@
     });
 
     imageGroup.forEach((group, i) => {
-      // Checking what orientation each image in group is
-      const imageTypes: ImageType[] = group.map(
-        image => image.naturalWidth > image.naturalHeight ? "landscape" : "portrait"
-      );
+      group.forEach(image => {
+        image.onload = () => {
+          console.log("Image loaded", image.src, i);
+          imagesLoaded[i]++;
+          if (imagesLoaded[i] === group.length) {
+            layoutImages(i);
+          }
+        };
 
-      // Getting the correct image layout based on how many images and orientation
-      const layoutSize = layouts[group.length];
-      const layout = layoutSize.find(layout => layout.order.toString() === imageTypes.toString());
-
-      // Set properties for CSS grid
-      layout?.grid.forEach((item, i) => {
-        group[i].style.gridRow = `${item.rowStart} / ${item.rowEnd}`;
-        group[i].style.gridColumn = `${item.colStart} / ${item.colEnd}`;
-      });
-
-      const wrapper = document.createElement("div");
-      wrapper.style.display = "grid";
-      wrapper.style.gap = "0.5rem";
-
-      // Adding the images in the group to a wrapper grid
-      group[0].parentNode?.insertBefore(wrapper, group[0]);
-      group.forEach((image, i) => {
-        if (layout?.grid[i].colEnd === 3) {
-          image.style.aspectRatio = longAspect;
-        } else if (image.naturalWidth >= image.naturalHeight) {
-          image.style.aspectRatio = landscapeAspect;
-        } else {
-          image.style.aspectRatio = portraitAspect;
-        }
-
-        wrapper.appendChild(image);
+        image.src = image.getAttribute("data-src") || "https://picsum.photos/200/300";
       });
     });
-
-    headings = contentContainer.querySelectorAll("h1");
-
-    if (headings) {
-      headings.forEach((heading, i) => {
-        heading.id = i.toString();
-      });
-    }
   });
 </script>
 
-<section class="lg:mx-lg space-y-8">
+<section class="lg:mx-xl xl:mx-xxl space-y-8">
   {#if headings && headings.length !== 0}
     <Collapsible.Root class="w-full bg-neutral dark:bg-neutral-600 text-white rounde-md" bind:open={isOutlineOpen}>
       <Collapsible.Trigger class="flex justify-between w-full p-xxs">

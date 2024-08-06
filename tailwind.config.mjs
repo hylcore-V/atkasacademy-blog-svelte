@@ -13,7 +13,7 @@ export default {
         "md": "8rem",
         "lg": "15rem",
         "xl": "20rem",
-        "xxl": "40rem",
+        "xxl": "30rem",
         "nav": "4.5rem",
         "big-nav": "6rem",
       },

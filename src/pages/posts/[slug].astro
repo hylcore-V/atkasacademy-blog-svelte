@@ -38,10 +38,10 @@ export async function getStaticPaths() {
 
               // Actual image
               `<img
-                src="${image(url)}"
+                onload="console.log("Image loaded");"
                 alt="${alt}"
-                class="w-full h-full object-cover"
-                loading="lazy"
+                data-src="${image(url)}"
+                class="w-full h-full object-cover dark:text-white"
               />` :
 
               // Placeholder
