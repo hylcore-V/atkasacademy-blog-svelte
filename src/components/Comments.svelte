@@ -8,10 +8,6 @@
   function createComment() {
 
   }
-
-  onMount(() => {
-    console.log("heyo");
-  });
 </script>
 
 <section class="mb-xs" id="comments">
