@@ -14,7 +14,7 @@
   });
 </script>
 
-<section class="lg:mx-lg mb-xs" id="comments">
+<section class="mb-xs" id="comments">
   <form
     class="w-full space-y-xs"
     on:submit|preventDefault={createComment}

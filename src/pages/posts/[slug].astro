@@ -77,8 +77,11 @@ const { content, title, date, cover, destination, podcast } = Astro.props;
     </div>
   </PageCover>
 
-  <PostContent client:load {content} {podcast} />
-  <Separator class="lg:mx-lg w-auto" />
-  <Comments client:visible {slug} />
+  <div class="lg:mx-xl xl:mx-xxl">
+    <PostContent client:load {content} {podcast} />
+    <Separator class="w-auto" />
+    <Comments client:visible {slug} />
+  </div>
+
   <PostNavigation {slug} />
 </Layout>
