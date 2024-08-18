@@ -4,8 +4,13 @@ import PageCover from "$components/PageCover.svelte"
 import { contentfulClient, type Destination } from "$lib/contentful";
 import { image } from "$lib/utils";
 
-const destinations = await contentfulClient.getEntries<Destination>({
+const result = await contentfulClient.getEntries<Destination>({
   content_type: "destination",
+});
+let destinations = result.items.sort((a, b) => {
+  if (a.fields.short < b.fields.short) return -1;
+  if (a.fields.short > b.fields.short) return 1;
+  return 0;
 });
 ---
 
@@ -15,7 +20,7 @@ const destinations = await contentfulClient.getEntries<Destination>({
   </PageCover>
 
   <section class="text-neutral grid lg:grid-cols-4 grid-cols-1 gap-1">
-    {destinations.items.map(item => (
+    {destinations.map(item => (
       <a
         href={`/destinations/${item.fields.slug}`}
         style={{ backgroundImage: `url('${image(item.fields.cover?.fields.file?.url)}')` }}
