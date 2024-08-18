@@ -7,6 +7,7 @@ import { image } from "$lib/utils";
 const result = await contentfulClient.getEntries<Destination>({
   content_type: "destination",
 });
+
 let destinations = result.items.sort((a, b) => {
   if (a.fields.short < b.fields.short) return -1;
   if (a.fields.short > b.fields.short) return 1;

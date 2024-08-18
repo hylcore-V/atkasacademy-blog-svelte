@@ -51,7 +51,7 @@ const posts = await contentfulClient.getEntries<BlogPost>({
 
   <Separator />
 
-  <section class="text-neutral grid grid-cols-4 gap-xxs">
+  <section class="text-neutral dark:text-white grid grid-cols-4 gap-xxs">
     {posts.items.map(item => (
       <a
         href={`/posts/${item.fields.slug}`}
@@ -61,7 +61,7 @@ const posts = await contentfulClient.getEntries<BlogPost>({
           style={{ backgroundImage: `url(${image(item.fields.cover?.fields.file?.url)})` }}
           class="h-40 bg-cover bg-center group-hover:brightness-75 duration-200"
         ></div>
-        <h3 class="font-semibold font-jost">{item.fields.title}</h3>
+        <h3 class="font-jost">{item.fields.title}</h3>
       </a>
     ))}
   </section>
