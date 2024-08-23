@@ -20,3 +20,10 @@ canvas {
   font-family: "ZhanKu";
   src: url(/fonts/ZhanKu.ttf);
 }
+
+.progressive-blur {
+  /* -webkit-backdrop-filter: blur(40px);
+  backdrop-filter: blur(40px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black);
+  mask-image: linear-gradient(to bottom, transparent, black); */
+}
