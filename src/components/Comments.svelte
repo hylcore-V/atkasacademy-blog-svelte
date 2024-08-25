@@ -8,6 +8,17 @@
   function createComment() {
 
   }
+
+  async function loadComments() {
+    const comments = await fetch("/api/data.json", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    }).then(response => response.json());
+
+    console.log(comments);
+  }
+
+  onMount(loadComments);
 </script>
 
 <section class="mb-xs" id="comments">

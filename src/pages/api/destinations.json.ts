@@ -8,5 +8,5 @@ export const GET: APIRoute = async () => {
     content_type: "destination",
   });
 
-  return new Response(JSON.stringify(entries.items))
+  return new Response(JSON.stringify(entries.items));
 }
