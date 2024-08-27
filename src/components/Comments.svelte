@@ -10,7 +10,7 @@
   }
 
   async function loadComments() {
-    const comments = await fetch("/api/data.json", {
+    const comments = await fetch(`/api/data.json/?slug=${slug}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     }).then(response => response.json());
@@ -18,7 +18,7 @@
     console.log(comments);
   }
 
-  onMount(loadComments);
+  // onMount(loadComments);
 </script>
 
 <section class="mb-xs" id="comments">
