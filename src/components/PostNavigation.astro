@@ -16,7 +16,7 @@ const nextPost = allPosts.items[currentPostIndex + 1];
 const previousPost = allPosts.items[currentPostIndex - 1];
 ---
 
-<nav class="flex justify-between items-center lg:sticky bottom-[40%] pointer-events-none">
+<nav class="flex justify-between items-center lg:sticky bottom-[40%] pointer-events-none px-xs">
   {nextPost &&
   <a href={`/posts/${nextPost.fields.slug}`} class="group w-lg pr-sm pointer-events-auto">
     <iconify-icon icon="gg:arrow-left" class="text-3xl group-hover:-translate-x-[0.5rem] duration-150"></iconify-icon>

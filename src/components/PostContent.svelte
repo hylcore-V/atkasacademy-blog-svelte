@@ -104,7 +104,7 @@
 
 <section class="space-y-8">
   {#if headings && headings.length !== 0}
-    <Collapsible.Root class="w-full bg-neutral dark:bg-neutral-600 text-white rounde-md" bind:open={isOutlineOpen}>
+    <Collapsible.Root class="w-full bg-neutral dark:bg-neutral-600 text-white" bind:open={isOutlineOpen}>
       <Collapsible.Trigger class="flex justify-between w-full p-xxs">
         <h3 class="font-jost font-semibold tracking-widest uppercase">
           Table of Contents

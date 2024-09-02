@@ -6,8 +6,8 @@
 <!-- Wavy footer -->
 <div class="bg-waves dark:bg-dark-waves bg-white dark:bg-neutral bg-cover bg-[center_bottom] bg-no-repeat w-full h-32 -my-0.5 duration-200"></div>
 
-<footer class="bg-footer dark:bg-dark-footer py-xs px-sm flex flex-col items-center duration-200" id="footer">
-  <section class="w-full flex justify-between items-center">
+<footer class="bg-footer dark:bg-dark-footer py-xs lg:px-sm px-xs flex flex-col items-center duration-200" id="footer">
+  <section class="w-full flex lg:flex-row flex-col justify-between items-center">
     <!-- Podcast links -->
     <div class="space-y-2">
       <a href="https://open.spotify.com/show/7xuJTB7kCfKB0JVBkgW4k3"
@@ -32,7 +32,7 @@
     </div>
 
     <!-- Website links -->
-    <div class="text-right space-x-sm">
+    <div class="text-right space-x-sm lg:block hidden">
       <div class="inline-block space-y-1">
         <h1 class="uppercase tracking-widest font-jost font-semibold text-sm">Pages</h1>
         <br>
@@ -55,7 +55,7 @@
 
   <Separator />
 
-  <section class="w-full flex items-center justify-between">
+  <section class="w-full flex lg:flex-row flex-col text-center lg:space-y-0 space-y-4 items-center justify-between">
     <p>© 2023 Atlas Academy. All rights reserved.</p>
 
     <div class="space-x-1">

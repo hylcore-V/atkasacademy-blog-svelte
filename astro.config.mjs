@@ -9,4 +9,7 @@ export default defineConfig({
   output: "hybrid",
   integrations: [tailwind(), svelte()],
   adapter: vercel(),
+  devToolbar: {
+    enabled: false,
+  },
 });

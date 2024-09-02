@@ -61,7 +61,7 @@
   </header>
 
   <!-- Navigation -->
-  <div class="font-jost font-semibold uppercase tracking-widest text-xs gap-8 items-center duration-200 h-full flex">
+  <div class="font-jost font-semibold uppercase tracking-widest text-xs gap-8 items-center duration-200 h-full lg:flex hidden">
     <a href="/">Home</a>
     <DestinationDropdown />
     <a href="/blog?page=1">Blog</a>
@@ -72,7 +72,7 @@
   </div>
 
   <!-- Socials -->
-  <div class="space-x-2">
+  <div class="space-x-2 lg:block hidden">
     <a
       href="https://www.facebook.com/worldschool.atlas.academy"
       target="_blank"
