@@ -102,7 +102,7 @@
     class={cn("flex lg:hidden text-[26px] justify-center items-center duration-150", { "rotate-90": navigationDropdown })}
   >
     {#if navigationDropdown}
-      <iconify-icon icon="mdi:close"></iconify-icon>
+      <iconify-icon icon="mdi:close" class="text-neutral dark:text-white"></iconify-icon>
     {:else}
       <iconify-icon icon="mdi:menu"></iconify-icon>
     {/if}
