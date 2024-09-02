@@ -47,6 +47,9 @@ export default {
       borderRadius: {
         "sm": "4px",
         // "md": "0px"
+      },
+      screens: {
+        "2xl": "1440px",
       }
     },
 	},

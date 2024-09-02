@@ -30,56 +30,54 @@ const latestReflectionPosts = await contentfulClient.getEntries<BlogPost>({
     </div>
   </PageCover>
 
-  <div class="xl:mx-lg lg:m-sm m-xs">
-    <section class="flex flex-col gap-8 text-balance text-center">
-      <span>我們一家把房子、車子和家當都賣掉，帶著一卡皮箱，到世界各地旅行，把世界當學校。 這裡紀錄了我們一家四口體驗生活即教育的環球旅程。</span>
-      <span>這裡沒有行程規劃，或是購物、餐廳資訊，有的是我們在路途中的經歷和反思，有的是爸媽和孩子一起脫離教育體系，從生活中學習知識和能力的過程，從實際腳踏過的土地來了解地理和歷史。</span>
-      <span>這裡沒有網美照，或是專業的攝影圖片，有的是我們在一路上遇到的人事物，累積成許許多多的故事，有的是我們站在大自然前的震撼，親眼見到人類藝術結晶的感動，以後會成為我們一家的共同記憶。</span>
-      <span>這裡沒有交通資訊，或是預算規劃，有的是我們在每個城市所做的觀察，拿來和原本居住在的城市做比較，有的是我們在每個國家吃到的特別食物，我們在每個街道轉角發現的小驚喜。</span>
-      <span>Worldschooling 是一種生活方式，沒有一定的模式和方法，沒有一定的時間長度，這裡分享了我們的旅程，希望能帶給你不同的思維，啟程向世界學習。</span>
-      <span>世界是學校，跟我們一起 Worldschooling!</span>
-    </section>
+  <section class="flex flex-col gap-8 text-balance text-center">
+    <span>我們一家把房子、車子和家當都賣掉，帶著一卡皮箱，到世界各地旅行，把世界當學校。 這裡紀錄了我們一家四口體驗生活即教育的環球旅程。</span>
+    <span>這裡沒有行程規劃，或是購物、餐廳資訊，有的是我們在路途中的經歷和反思，有的是爸媽和孩子一起脫離教育體系，從生活中學習知識和能力的過程，從實際腳踏過的土地來了解地理和歷史。</span>
+    <span>這裡沒有網美照，或是專業的攝影圖片，有的是我們在一路上遇到的人事物，累積成許許多多的故事，有的是我們站在大自然前的震撼，親眼見到人類藝術結晶的感動，以後會成為我們一家的共同記憶。</span>
+    <span>這裡沒有交通資訊，或是預算規劃，有的是我們在每個城市所做的觀察，拿來和原本居住在的城市做比較，有的是我們在每個國家吃到的特別食物，我們在每個街道轉角發現的小驚喜。</span>
+    <span>Worldschooling 是一種生活方式，沒有一定的模式和方法，沒有一定的時間長度，這裡分享了我們的旅程，希望能帶給你不同的思維，啟程向世界學習。</span>
+    <span>世界是學校，跟我們一起 Worldschooling!</span>
+  </section>
 
-    <Separator />
+  <Separator />
 
-    <h1 class="uppercase font-jost tracking-widest font-semibold text-3xl mb-8">Recent Posts</h1>
+  <h1 class="uppercase font-jost tracking-widest font-semibold text-3xl mb-8">Recent Posts</h1>
 
-    <section class="grid lg:grid-cols-4 grid-cols-1 gap-4">
-      {latestPodcastPosts.items.map(item => (
-        <a
-          href={`/posts/${item.fields.slug}`}
-          class="aspect-square bg-cover bg-center relative hover:rotate-1 duration-200"
-          style={{ backgroundImage: `url('${image(item.fields.cover?.fields.file?.url)}')` }}
-        >
-          <div class="absolute bottom-0 bg-gradient-to-t from-neutral duration-150 h-40 w-full"></div>
+  <section class="grid lg:grid-cols-4 grid-cols-1 gap-4">
+    {latestPodcastPosts.items.map(item => (
+      <a
+        href={`/posts/${item.fields.slug}`}
+        class="aspect-square bg-cover bg-center relative hover:rotate-1 duration-200"
+        style={{ backgroundImage: `url('${image(item.fields.cover?.fields.file?.url)}')` }}
+      >
+        <div class="absolute bottom-0 bg-gradient-to-t from-neutral duration-150 h-40 w-full"></div>
 
-          <div class="w-full p-6 absolute bottom-0 left-0 text-white">
-            <h3 class="text-sm font-bold">{item.fields.title}</h3>
-            <time class="text-xs uppercase">{formatDate(item.fields.date)}</time>
-          </div>
-        </a>
-      ))}
-    </section>
+        <div class="w-full p-6 absolute bottom-0 left-0 text-white">
+          <h3 class="text-sm font-bold">{item.fields.title}</h3>
+          <time class="text-xs uppercase">{formatDate(item.fields.date)}</time>
+        </div>
+      </a>
+    ))}
+  </section>
 
-    <Separator />
+  <Separator />
 
-    <h1 class="uppercase font-jost tracking-widest font-semibold text-3xl mb-8">Recent Reflections</h1>
+  <h1 class="uppercase font-jost tracking-widest font-semibold text-3xl mb-8">Recent Reflections</h1>
 
-    <section class="grid lg:grid-cols-4 grid-cols-1 gap-4">
-      {latestReflectionPosts.items.map(item => (
-        <a
-          href={`/posts/${item.fields.slug}`}
-          class="aspect-square bg-cover bg-center relative hover:rotate-1 duration-200"
-          style={{ backgroundImage: `url('${image(item.fields.cover?.fields.file?.url)}')` }}
-        >
-          <div class="absolute bottom-0 bg-gradient-to-t from-neutral duration-150 h-40 w-full"></div>
+  <section class="grid lg:grid-cols-4 grid-cols-1 gap-4">
+    {latestReflectionPosts.items.map(item => (
+      <a
+        href={`/posts/${item.fields.slug}`}
+        class="aspect-square bg-cover bg-center relative hover:rotate-1 duration-200"
+        style={{ backgroundImage: `url('${image(item.fields.cover?.fields.file?.url)}')` }}
+      >
+        <div class="absolute bottom-0 bg-gradient-to-t from-neutral duration-150 h-40 w-full"></div>
 
-          <div class="w-full p-6 absolute bottom-0 left-0 text-white">
-            <h3 class="text-sm font-bold">{item.fields.title}</h3>
-            <time class="text-xs uppercase">{formatDate(item.fields.date)}</time>
-          </div>
-        </a>
-      ))}
-    </section>
-  </div>
+        <div class="w-full p-6 absolute bottom-0 left-0 text-white">
+          <h3 class="text-sm font-bold">{item.fields.title}</h3>
+          <time class="text-xs uppercase">{formatDate(item.fields.date)}</time>
+        </div>
+      </a>
+    ))}
+  </section>
 </Layout>

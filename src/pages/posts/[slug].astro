@@ -64,7 +64,7 @@ const { slug } = Astro.params;
 const { content, title, date, cover, destination, podcast } = Astro.props;
 ---
 
-<Layout {title}>
+<Layout {title} padding={false}>
   <PageCover src={cover} slot="before-content">
     <div class="uppercase font-normal text-lg font-jost tracking-widest space-y-xxs px-md">
       <time class="inline">{date}</time>
