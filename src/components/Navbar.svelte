@@ -99,12 +99,13 @@
   <!-- Mobile hamburger button -->
   <button
     on:click={() => (navigationDropdown = !navigationDropdown)}
-    class="flex lg:hidden justify-center items-center"
+    class={cn("flex lg:hidden text-[26px] justify-center items-center duration-150", { "rotate-90": navigationDropdown })}
   >
-    <iconify-icon
-      icon="mdi:menu"
-      class="lg:hidden text-[26px] duration-150"
-    ></iconify-icon>
+    {#if navigationDropdown}
+      <iconify-icon icon="mdi:close"></iconify-icon>
+    {:else}
+      <iconify-icon icon="mdi:menu"></iconify-icon>
+    {/if}
   </button>
 </nav>
 
