@@ -46,7 +46,7 @@
 <Search {search} {query} />
 
 <!-- Grid of posts -->
-<section class="text-neutral dark:text-white grid grid-cols-4 gap-xxs">
+<section class="text-neutral dark:text-white grid lg:grid-cols-4 grid-cols-1 gap-xxs">
   {#each posts as item}
     <a
       href={`/posts/${item.fields.slug}`}
