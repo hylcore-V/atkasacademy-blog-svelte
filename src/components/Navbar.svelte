@@ -118,6 +118,7 @@
 
     <div class="flex flex-col items-center gap-4 font-semibold tracking-widest uppercase font-jost text-xl">
       <a href="/">Home</a>
+      <a href="/destinations">Destinations</a>
       <a href="/blog?page=1">Blog</a>
       <a href="/gallery">Gallery</a>
       <a href="/about">About</a>
