@@ -47,7 +47,7 @@
 
 <nav class={cn(
   "flex justify-between items-center fixed w-full z-10 px-xs duration-500",
-  isScrolledScreen && (isHome ? true : scrollDirection === "down") ? "-top-[7rem]" : "top-0",
+  isScrolledScreen && scrollDirection === "down" ? "-top-[7rem]" : "top-0",
   {
     "text-white bg-transparent h-big-nav": isPageTop,
     "text-neutral dark:text-white bg-white dark:bg-neutral h-nav shadow-lg": !isPageTop,
