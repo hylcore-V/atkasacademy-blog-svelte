@@ -3,8 +3,6 @@
   import "iconify-icon";
   import { cn } from "$lib/utils";
 
-  export let size: "lg" | "sm" = "sm";
-
   let darkMode: boolean;
 
   function switchDarkMode() {

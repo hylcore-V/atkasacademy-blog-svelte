@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { cn } from "$lib/utils";
-  import { fly } from "svelte/transition";
+  import { fade, fly } from "svelte/transition";
   import "iconify-icon";
 
   import ThemeButton from "$components/ThemeButton.svelte";
@@ -16,6 +16,7 @@
   let scrollDirection: "up" | "down" = "up";
   let isScrolledScreen = false;
   let isScrolledContent = false;
+  let navigationDropdown = false;
 
   function checkPageTop() {
     isPageTop = window.scrollY === 0;
@@ -46,7 +47,7 @@
 </script>
 
 <nav class={cn(
-  "flex justify-between items-center fixed w-full z-10 px-xs duration-500",
+  "flex justify-between items-center fixed w-full z-30 px-xs duration-500",
   isScrolledScreen && scrollDirection === "down" ? "-top-[7rem]" : "top-0",
   {
     "text-white bg-transparent h-big-nav": isPageTop,
@@ -94,7 +95,58 @@
       <iconify-icon icon="fa:podcast" class="text-xl duration-150"></iconify-icon>
     </a>
   </div>
+
+  <!-- Mobile hamburger button -->
+  <button
+    on:click={() => (navigationDropdown = !navigationDropdown)}
+    class="flex justify-center items-center"
+  >
+    <iconify-icon
+      icon="mdi:menu"
+      class="lg:hidden text-[26px] duration-150"
+    ></iconify-icon>
+  </button>
 </nav>
+
+<!-- Mobile navigation dropdown -->
+{#if navigationDropdown}
+  <div
+    class="h-screen w-full fixed top-0 left-0 dark:bg-neutral bg-white z-20 flex flex-col justify-center items-center gap-sm"
+    transition:fade={{ duration: 150 }}
+  >
+    <ThemeButton />
+
+    <div class="flex flex-col items-center gap-4 font-semibold tracking-widest uppercase font-jost text-xl">
+      <a href="/">Home</a>
+      <a href="/blog?page=1">Blog</a>
+      <a href="/gallery">Gallery</a>
+      <a href="/about">About</a>
+    </div>
+
+    <div class="flex gap-6 text-2xl">
+      <a
+        href="https://www.facebook.com/worldschool.atlas.academy"
+        target="_blank"
+      >
+        <iconify-icon icon="mdi:facebook" class="duration-150"></iconify-icon>
+      </a>
+
+      <a
+        href="https://open.spotify.com/show/7xuJTB7kCfKB0JVBkgW4k3"
+        target="_blank"
+      >
+        <iconify-icon icon="mdi:spotify" class="duration-150"></iconify-icon>
+      </a>
+
+      <a
+        href="https://podcasts.apple.com/us/podcast/%E4%B8%96%E7%95%8C%E6%98%AF%E5%AD%B8%E6%A0%A1-worldschooling/id1646258789"
+        target="_blank"
+      >
+        <iconify-icon icon="fa:podcast" class="duration-150"></iconify-icon>
+      </a>
+    </div>
+  </div>
+{/if}
 
 <!-- Back to top button -->
 {#if !isPageTop && !isPageBottom && !isHome}
