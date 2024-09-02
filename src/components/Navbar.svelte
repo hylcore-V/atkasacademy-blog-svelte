@@ -99,7 +99,7 @@
   <!-- Mobile hamburger button -->
   <button
     on:click={() => (navigationDropdown = !navigationDropdown)}
-    class="flex justify-center items-center"
+    class="flex lg:hidden justify-center items-center"
   >
     <iconify-icon
       icon="mdi:menu"
