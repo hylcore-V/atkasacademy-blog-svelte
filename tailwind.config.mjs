@@ -52,7 +52,7 @@ export default {
         "2xl": "1440px",
       },
       height: {
-        "screen": "100dvh",
+        // "screen": "100dvh",
       },
     },
 	},
