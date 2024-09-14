@@ -64,7 +64,7 @@
 </script>
 
 <!-- Grid of photos -->
-<section class="text-neutral grid grid-cols-5 gap-xxs">
+<section class="text-neutral grid lg:grid-cols-5 grid-cols-1 gap-xxs">
   {#each gallery as photo, i (photo.fields.slug)}
     <Photo {photo} on:click={() => (selectedIndex = i)} />
   {/each}
@@ -76,7 +76,10 @@
   </div>
 {/if}
 
-<Dialog.Root open={selectedPhoto !== null}>
+<Dialog.Root
+  open={selectedPhoto !== null}
+  onOpenChange={() => (selectedIndex = -1)}
+>
   <Dialog.Portal>
     <Dialog.Overlay
       transition={fade}
@@ -87,34 +90,35 @@
     <Dialog.Content class="fixed z-50 w-full h-full inset-0 text-white pointer-events-none">
       <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
       <div class="relative w-full h-full" on:keydown={keyPress} role="dialog">
-        <Dialog.Close class="absolute top-xs right-xs pointer-events-auto size-xs">
+        <Dialog.Close class="absolute top-xs right-xs pointer-events-auto size-xs lg:block hidden">
           <iconify-icon icon="mdi:close" class="text-4xl"></iconify-icon>
         </Dialog.Close>
 
-        <div class="h-full flex items-center justify-center">
-          <div class="flex w-full h-4/5 items-center justify-between gap-xs">
-            <button
-              on:click={() => changePhoto(-1)}
-              disabled={!(selectedIndex > 0)}
-              class={cn(
-              "flex justify-center items-center h-full min-w-sm group pointer-events-auto duration-200",
-              selectedIndex > 0 ? "opacity-100" : "opacity-0"
-            )}>
-              <iconify-icon icon="mdi:chevron-left" class="text-4xl group-hover:scale-125 group-active:scale-100 duration-100"></iconify-icon>
-            </button>
+        <div class="w-full h-full 2xl:py-md lg:py-sm py-xxs flex">
+          <button
+            on:click={() => changePhoto(-1)}
+            disabled={!(selectedIndex > 0)}
+            class={cn(
+            "lg:flex hidden justify-center items-center h-full min-w-sm group pointer-events-auto duration-200",
+            selectedIndex > 0 ? "opacity-100" : "opacity-0"
+          )}> 
+            <iconify-icon icon="mdi:chevron-left" class="text-4xl group-hover:scale-125 group-active:scale-100 duration-100"></iconify-icon>
+          </button>
 
+          <div class="2xl:px-lg lg:px-md px-xxs w-full h-full flex lg:flex-row flex-col items-center justify-between gap-xs">
             <img
               bind:this={imageElement}
               src={selectedPhoto?.fields.image?.fields.file?.url}
               alt={selectedPhoto?.fields.image?.fields.description}
-              class="aspect-square h-full pointer-events-auto"
+              class="aspect-square lg:h-full lg:w-auto w-full pointer-events-auto"
             />
 
-            <div class="h-full flex flex-col gap-sm text-left items-start justify-start flex-grow">
+            <div class="lg:h-full flex flex-col lg:gap-sm gap-xs text-left items-start justify-start flex-shrink-0">
               <div class="pointer-events-auto">
                 <h1 class="font-jost uppercase tracking-widest font-semibold text-xl">
                   {selectedPhoto?.fields.title}
                 </h1>
+
                 <h2 class="italic text-base">
                   <span>{selectedPhoto?.fields.city},</span>
                   <a href="/destinations/{selectedPhoto?.fields.country?.fields.slug}">
@@ -123,23 +127,23 @@
                 </h2>
               </div>
 
-              <p class="text-base min-w-full pointer-events-auto">
+              <p class="text-base min-w-full pointer-events-auto overflow-auto h-full">
                 {selectedPhoto?.fields.description}
               </p>
             </div>
-
-            {#if selectedIndex < gallery.length}
-              <button
-                on:click={() => changePhoto(1)}
-                disabled={!(selectedIndex < gallery.length - 1)}
-                class={cn(
-                "flex justify-center items-center h-full min-w-sm group pointer-events-auto duration-200",
-                selectedIndex < gallery.length - 1 ? "opacity-100" : "opacity-0"
-              )}>
-                <iconify-icon icon="mdi:chevron-right" class="text-4xl group-hover:scale-125 group-active:scale-100 duration-100"></iconify-icon>
-              </button>
-            {/if}
           </div>
+
+          {#if selectedIndex < gallery.length}
+            <button
+              on:click={() => changePhoto(1)}
+              disabled={!(selectedIndex < gallery.length - 1)}
+              class={cn(
+              "lg:flex hidden justify-center items-center h-full min-w-sm group pointer-events-auto duration-200",
+              selectedIndex < gallery.length - 1 ? "opacity-100" : "opacity-0"
+            )}>
+              <iconify-icon icon="mdi:chevron-right" class="text-4xl group-hover:scale-125 group-active:scale-100 duration-100"></iconify-icon>
+            </button>
+          {/if}
         </div>
       </div>
     </Dialog.Content>
