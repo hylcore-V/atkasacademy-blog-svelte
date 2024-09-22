@@ -94,26 +94,27 @@
           <iconify-icon icon="mdi:close" class="text-4xl"></iconify-icon>
         </Dialog.Close>
 
-        <div class="w-full h-full 2xl:py-md lg:py-sm py-xxs flex">
+        <div class="w-full h-full 2xl:py-md lg:py-sm flex">
           <button
             on:click={() => changePhoto(-1)}
             disabled={!(selectedIndex > 0)}
             class={cn(
             "lg:flex hidden justify-center items-center h-full min-w-sm group pointer-events-auto duration-200",
             selectedIndex > 0 ? "opacity-100" : "opacity-0"
-          )}> 
+          )}>
             <iconify-icon icon="mdi:chevron-left" class="text-4xl group-hover:scale-125 group-active:scale-100 duration-100"></iconify-icon>
           </button>
 
-          <div class="2xl:px-lg lg:px-md px-xxs w-full h-full flex lg:flex-row flex-col items-center justify-between gap-xs">
+          <div class="2xl:px-lg lg:px-md p-xxs w-full h-full flex lg:flex-row flex-col items-center justify-evenly lg:gap-xs gap-xxs">
             <img
               bind:this={imageElement}
               src={selectedPhoto?.fields.image?.fields.file?.url}
               alt={selectedPhoto?.fields.image?.fields.description}
-              class="aspect-square lg:h-full lg:w-auto w-full pointer-events-auto"
+              class="aspect-square lg:h-full lg:w-auto w-full lg:pointer-events-auto pointer-events-none"
             />
 
-            <div class="lg:h-full flex flex-col lg:gap-sm gap-xs text-left items-start justify-start flex-shrink-0">
+            <!-- <div class="lg:h-full flex flex-col lg:gap-sm gap-xxs text-left items-start justify-start"> -->
+            <div class="space-y-xxs shrink">
               <div class="pointer-events-auto">
                 <h1 class="font-jost uppercase tracking-widest font-semibold text-xl">
                   {selectedPhoto?.fields.title}
@@ -127,7 +128,7 @@
                 </h2>
               </div>
 
-              <p class="text-base min-w-full pointer-events-auto overflow-auto h-full">
+              <p class="text-base w-full pointer-events-auto overflow-auto h-full">
                 {selectedPhoto?.fields.description}
               </p>
             </div>
