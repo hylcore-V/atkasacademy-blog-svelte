@@ -8,12 +8,14 @@
   import { onMount } from "svelte";
 
   const perPage = 20;
+  let container: HTMLDivElement;
 
   let page = 0;
   let loading = false;
   let loadedAll = false;
   let gallery: Entry<GalleryPhoto, "WITHOUT_UNRESOLVABLE_LINKS", string>[] = [];
   let observer: IntersectionObserver;
+  let touchStartY: number;
 
   let selectedIndex: number = -1;
   let selectedPhoto: Entry<GalleryPhoto, "WITHOUT_UNRESOLVABLE_LINKS", string> | null = null;
@@ -53,6 +55,22 @@
     else if (e.code === "ArrowLeft") changePhoto(-1);
   }
 
+  function touchStart(e: TouchEvent) {
+    touchStartY = e.touches[0].clientY;
+  }
+
+  function touchMove(e: TouchEvent) {
+    if (!container) return;
+
+    const diff = e.touches[0].clientY - touchStartY;
+    container.style.scale = `${-Math.abs(diff) / 1000 + 1}`;
+  }
+
+  function touchEnd(e: TouchEvent) {
+    if (e.changedTouches[0].clientY === touchStartY) return;
+    selectedPhoto = null;
+  }
+
   onMount(() => {
     const footer = document.getElementById("footer");
     observer = new IntersectionObserver(loadPage, {
@@ -60,6 +78,17 @@
       threshold: 0.2,
     });
     if (footer) observer.observe(footer);
+
+    document.addEventListener("touchstart", touchStart);
+    document.addEventListener("touchmove", touchMove);
+    document.addEventListener("touchend", touchEnd);
+
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("touchstart", touchStart);
+      document.removeEventListener("touchmove", touchMove);
+      document.removeEventListener("touchend", touchEnd);
+    }
   });
 </script>
 
@@ -94,7 +123,10 @@
           <iconify-icon icon="mdi:close" class="text-4xl"></iconify-icon>
         </Dialog.Close>
 
-        <div class="w-full h-full 2xl:py-md lg:py-sm flex">
+        <div
+          class="w-full h-full 2xl:py-md lg:py-sm flex"
+          bind:this={container}
+        >
           <button
             on:click={() => changePhoto(-1)}
             disabled={!(selectedIndex > 0)}
@@ -114,9 +146,9 @@
             />
 
             <!-- <div class="lg:h-full flex flex-col lg:gap-sm gap-xxs text-left items-start justify-start"> -->
-            <div class="space-y-xxs shrink">
+            <div class="space-y-xxs">
               <div class="pointer-events-auto">
-                <h1 class="font-jost uppercase tracking-widest font-semibold text-xl">
+                <h1 class="font-jost uppercase tracking-widest font-semibold text-lg text-pretty">
                   {selectedPhoto?.fields.title}
                 </h1>
 
@@ -128,7 +160,7 @@
                 </h2>
               </div>
 
-              <p class="text-base w-full pointer-events-auto overflow-auto h-full">
+              <p class="text-sm w-full pointer-events-auto overflow-auto">
                 {selectedPhoto?.fields.description}
               </p>
             </div>
