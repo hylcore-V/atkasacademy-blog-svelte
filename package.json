@@ -16,6 +16,7 @@
     "@astrojs/vercel": "^7.5.4",
     "@contentful/rich-text-html-renderer": "^16.3.5",
     "@fontsource-variable/jost": "^5.0.19",
+    "@prisma/client": "^5.20.0",
     "@tailwindcss/typography": "^0.5.13",
     "@theatre/core": "^0.7.1",
     "@theatre/studio": "^0.7.1",
@@ -38,6 +39,7 @@
     "typescript": "^5.4.5"
   },
   "devDependencies": {
-    "@types/gsap": "^3.0.0"
+    "@types/gsap": "^3.0.0",
+    "prisma": "^5.20.0"
   }
 }
