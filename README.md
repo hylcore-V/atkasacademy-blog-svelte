@@ -1,4 +1,7 @@
-# Astro Starter Kit: Basics
+# Atlasacademy Blog
+
+
+## Astro Starter Kit: Basics
 
 ```sh
 npm create astro@latest -- --template basics
